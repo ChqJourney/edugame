@@ -10,12 +10,11 @@ export const DimensionSelector=()=>{
         }
     }
     return (
-        <select className="w-24 border outline-none rounded-md pl-4" onChange={e=>handleDimensionChange(e)}>
+        <select className="w-24 border outline-none rounded-md pl-4 mx-1 cursor-pointer hover:scale-105" onChange={e=>handleDimensionChange(e)}>
             <option value={3}>3 x 3</option>
             <option value={4}>4 x 4</option>
             <option value={5}>5 x 5</option>
-            <option value={8}>8 x 8</option>
-            <option value={10}>10x10</option>
+            <option value={6}>6 x 6</option>
         </select>
     )
 }

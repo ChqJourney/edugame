@@ -4,13 +4,12 @@ import { GameContext, initState } from './operations/GameContext';
 import { GameReducer } from './operations/GameReducer';
 
 function App() {
-  
-  const [state,dispatch]= useReducer(GameReducer, initState);
-  return (
-    <div className='w-full h-full p-10'>
-      <GameContext.Provider value={{state,dispatch}}>
 
-      <GameBox/>
+  const [state, dispatch] = useReducer(GameReducer, initState);
+  return (
+    <div className='w-full h-full py-10 px-2'>
+      <GameContext.Provider value={{ state, dispatch }}>
+        <GameBox />
       </GameContext.Provider>
     </div>
   );

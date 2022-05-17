@@ -21,7 +21,7 @@ export const Controller=()=>{
             <TimerDisplay time={state.roundTime} status={state.status}/>
             <DimensionSelector/>
             <RoundTimeSelector/>
-            <button className="ml-10 border border-slate-600 rounded-md w-32 h-10"
+            <button className="ml-2 border border-slate-600 rounded-md w-32 h-10 hover:scale-105 hover:bg-sky-300"
             onClick={startAction}>{state.btnText}</button>
 
         </div>

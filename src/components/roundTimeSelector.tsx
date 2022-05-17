@@ -9,7 +9,7 @@ export const RoundTimeSelector=()=>{
         }
     }
     return (
-        <select className="w-24 outline-none border rounded-md pl-4" onChange={e=>handleRoundTime(e)}>
+        <select className="w-24 outline-none border rounded-md pl-4 hover:scale-105 cursor-pointer" onChange={e=>handleRoundTime(e)}>
             <option value={60}>60s</option>
             <option value={120}>120s</option>
             <option value={180}>180s</option>
