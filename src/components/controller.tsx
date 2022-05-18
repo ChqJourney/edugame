@@ -17,7 +17,7 @@ export const Controller=()=>{
         }
     }
     return (
-        <div className="flex mb-8 justify-between">
+        <div className="flex mb-8 justify-between mx-1 md:mx-4">
             <TimerDisplay time={state.roundTime} status={state.status}/>
             <DimensionSelector/>
             <RoundTimeSelector/>

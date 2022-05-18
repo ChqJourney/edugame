@@ -7,7 +7,7 @@ function App() {
 
   const [state, dispatch] = useReducer(GameReducer, initState);
   return (
-    <div className='w-full h-full py-10 px-2'>
+    <div className='w-full h-full'>
       <GameContext.Provider value={{ state, dispatch }}>
         <GameBox />
       </GameContext.Provider>

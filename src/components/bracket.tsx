@@ -6,7 +6,10 @@ export const Bracket = () => {
     const { state } = useContext(GameContext)
     console.log(state)
     return (
-        <Blocks arr={state.arr}  dimension={state.dimension} status={state.status} />
+        <div className="mx-1 md:mx-4">
+
+            <Blocks arr={state.arr}  dimension={state.dimension} status={state.status} />
+            </div>
     )
 }
 export function createRandomArray(num:number):number[]{

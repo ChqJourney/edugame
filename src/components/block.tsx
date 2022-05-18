@@ -37,6 +37,9 @@ export const Block = ({  num, status }: { num: number, status: string }) => {
                 }, 300);
             }
         }
+        if(status==='stop'){
+            
+        }
     }
     if(content!==0){
 

@@ -16,9 +16,13 @@ export const TimerDisplay = ({ time, status }: { time: number, status: string })
                 dispatch({ type: 'finished', leftTime: sec })
                 dispatch({ type: 'set_game_status', status: 'idle', btnText: 'Start' })
                 dispatch({type:'set_game_parameter',roundTime:state.roundTime,dimension:state.dimension,arr:createRandomArray(state.dimension*state.dimension)})
-                const rs=validateAndPersistanceRecords(state.records,{time:state.roundTime-sec,createdAt:new Date()});
+                const rs=validateAndPersistanceRecords(state.records??[],{time:state.roundTime-sec,createdAt:new Date().toLocaleString()});
                 dispatch({type:'set_game_records',recordLevel:`${state.dimension} x ${state.dimension}`,records:rs})
-                localStorage.setItem('records',JSON.stringify({...rs}))
+                var level=`${state.dimension} x ${state.dimension}`
+                let obj:any=JSON.parse(localStorage.getItem('records')??"")
+                obj[level]=[...rs]
+                
+                localStorage.setItem('records',JSON.stringify(obj))
             } else {
                 if (sec !== 0) {
                     interval = setInterval(() => setTime(sec => sec - 1), 1000)

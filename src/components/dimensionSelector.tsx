@@ -8,6 +8,7 @@ export const DimensionSelector=()=>{
         if(state.status!=='running'){
             dispatch({type:'set_game_parameter',dimension:e.target.value,roundTime:state.roundTime,arr:createRandomArray(e.target.value*e.target.value)})
         }
+        dispatch({type:'set_game_records',recordLevel:`${e.target.value} x ${e.target.value}`,records:JSON.parse(localStorage.getItem('records')??"")[`${e.target.value} x ${e.target.value}`]})
     }
     return (
         <select className="w-24 border outline-none rounded-md pl-4 mx-1 cursor-pointer hover:scale-105" onChange={e=>handleDimensionChange(e)}>
