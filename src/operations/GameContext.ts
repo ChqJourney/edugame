@@ -1,5 +1,5 @@
 import React, {Dispatch } from "react";
-import { createRandomArray } from "../components/bracket";
+import { createRandomArray } from "../focus/bracket";
 import { Action, State } from "./GameReducer";
 
 export const initState:State={status:'idle',roundTime:60,btnText:'Start',dimension:3,arr:createRandomArray(9),leftTime:10000,recordLevel:"3 x 3",records:[]};

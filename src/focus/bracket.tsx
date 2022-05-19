@@ -4,7 +4,6 @@ import { Block } from "./block";
 
 export const Bracket = () => {
     const { state } = useContext(GameContext)
-    console.log(state)
     return (
         <div className="mx-1 md:mx-4">
 
@@ -25,11 +24,8 @@ export function createRandomArray(num:number):number[]{
 }
 
 export const Blocks = ({ dimension, status,arr }: { dimension: number, status: string,arr:number[] }) => {
-    console.log("render blocks")
     const cols=dimension;
     const cells=dimension*dimension;
-    console.log(cols)
-    console.log(cells)
     
     return (
         <div style={{display:"grid",gridTemplateColumns:`repeat(${cols}, minmax(0, 1fr))`,gap:"10px"}}>

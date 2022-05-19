@@ -7,7 +7,7 @@ import { Title } from "./title";
 
 export const GameBox = () => {
     return (
-        <div className="flex flex-col relative h-screen justify-between overflow-y-hidden">
+        <div className="flex flex-col relative h-screen justify-between overflow-y-hidden lg:w-[600px] md:mx-auto">
             <Title/>
             <Controller  />
             <InfoBar/>

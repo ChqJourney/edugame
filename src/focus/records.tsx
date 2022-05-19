@@ -8,13 +8,12 @@ export const Records=()=>{
         let localRecordsStr=localStorage.getItem('records')
         if(localRecordsStr!=null){
             const obj=JSON.parse(localRecordsStr)
-            console.log(obj)
             dispatch({type:"set_game_records",recordLevel:`${state.dimension} x ${state.dimension}`,records:obj[`${state.dimension} x ${state.dimension}`]??[]})
         } 
     },[])
 
     return (
-        <div className="mx-2 md:mx-4 border border-pink-500 mt-4 rounded-md px-2 md:px-4 overflow-y-auto mb-1">
+        <div className="mx-2 md:mx-4 border border-pink-500 h-[10%] mt-4 rounded-md px-2 md:px-4 overflow-y-auto mb-1">
         
         <div className="font-bold  text-sky-700">Records of {state.dimension} x {state.dimension}:</div>
         {state.records&&state.records.map((val:any,idx:number)=><Record key={idx} idx={idx}  createdAt={val.createdAt} time={val.time}/>)}
