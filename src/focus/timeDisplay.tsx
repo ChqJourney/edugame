@@ -27,8 +27,12 @@ export const TimerDisplay = ({ time, status }: { time: number, status: string })
                     interval = setInterval(() => setTime(sec => sec - 1), 1000)
                 } else {
                     clearInterval(interval)
-                    dispatch({type:'set_game_status',status:'idle',btnText:'time out'})
-                    dispatch({ type: 'finished', leftTime: 0 })
+                    dispatch({type:'set_game_status',status:'timeout',btnText:state.btnText})
+                    setTimeout(() => {
+                        dispatch({type:'set_game_status',status:'idle',btnText:'Start'})
+                        dispatch({type:'set_game_parameter',roundTime:state.roundTime,dimension:state.dimension,arr:createRandomArray(state.dimension*state.dimension)})
+                        dispatch({ type: 'finished', leftTime: 0 })
+                    }, 2500);
                 }
             }
         }

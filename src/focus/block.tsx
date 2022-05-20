@@ -4,7 +4,7 @@ import { GameContext } from "../operations/GameContext";
 export const Block = ({  num, status }: { num: number, status: string }) => {
     const {state,dispatch}=useContext(GameContext)
     const [wrong,setWrong]=useState(false)
-    let content:any = "#"
+    let content:any = num
     switch (status) {
         case 'idle':
             content = <MagIcon/>;
@@ -12,8 +12,10 @@ export const Block = ({  num, status }: { num: number, status: string }) => {
         case 'running':
             content = num;
             break;
-        case 'out':
-            content = "*";
+        case 'timeout':
+            // var isLeft=state.arr.filter(v=>v!==0).includes(num)
+            // if(isLeft)
+            // content = "*";
             break;
         default:
             break;
@@ -31,15 +33,14 @@ export const Block = ({  num, status }: { num: number, status: string }) => {
                 })
                 dispatch({type:'block_click',arr:modifiedArr})
             }else{
+
                 setWrong(true)
                 setTimeout(() => {
                     setWrong(false)
                 }, 300);
             }
         }
-        if(status==='stop'){
-            
-        }
+        
     }
     if(content!==0){
 
@@ -89,7 +90,7 @@ export const BianIcon=()=>{
 function findMin(numArr:number[]):number{
     let temp=numArr.length
     for(let i=0;i<numArr.length;i++){
-        if(numArr[i]!=0){
+        if(numArr[i]!==0){
             if(numArr[i]<temp){
                 temp=numArr[i]
             }

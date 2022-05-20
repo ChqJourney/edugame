@@ -1,5 +1,4 @@
 import React, { useReducer } from 'react';
-import { CalculatorContainer } from './calculates/calculatorContainer';
 import { GameBox } from './focus/gamebox';
 import { GameContext, initState } from './operations/GameContext';
 import { GameReducer } from './operations/GameReducer';

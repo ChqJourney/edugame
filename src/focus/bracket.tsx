@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { GameContext } from "../operations/GameContext";
 import { Block } from "./block";
 
@@ -25,7 +25,6 @@ export function createRandomArray(num:number):number[]{
 
 export const Blocks = ({ dimension, status,arr }: { dimension: number, status: string,arr:number[] }) => {
     const cols=dimension;
-    const cells=dimension*dimension;
     
     return (
         <div style={{display:"grid",gridTemplateColumns:`repeat(${cols}, minmax(0, 1fr))`,gap:"10px"}}>
