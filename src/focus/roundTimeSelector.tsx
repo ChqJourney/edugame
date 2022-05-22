@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { GameContext } from "../operations/GameContext";
+import { FocusContext } from "../operations/FocusContext";
 
 export const RoundTimeSelector=()=>{
-    const {state,dispatch}=useContext(GameContext)
+    const {state,dispatch}=useContext(FocusContext)
     const handleRoundTime=(e:any)=>{
         if(state.status!=='running'){
-            dispatch({type:'set_game_parameter',roundTime:e.target.value,dimension:state.dimension,arr:state.arr})
+            dispatch({type:'set_game_parameter',roundTime:e.target.value,dimension:state.dimension,arr:state.arr??[]})
         }
     }
     return (

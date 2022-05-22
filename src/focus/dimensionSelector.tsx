@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { GameContext } from "../operations/GameContext";
+import { FocusContext } from "../operations/FocusContext";
 import { createRandomArray } from "./bracket";
 
 export const DimensionSelector = () => {
-    const { state, dispatch } = useContext(GameContext)
+    const { state, dispatch } = useContext(FocusContext)
     const handleDimensionChange = (e: any) => {
         if (state.status !== 'running') {
             dispatch({ type: 'set_game_parameter', dimension: e.target.value, roundTime: fitRoundTime(e.target.value), arr: createRandomArray(e.target.value * e.target.value) })

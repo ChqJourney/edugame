@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import { GameContext } from "../operations/GameContext";
+import { FocusContext } from "../operations/FocusContext";
 
 export const Block = ({  num, status }: { num: number, status: string }) => {
-    const {state,dispatch}=useContext(GameContext)
+    const {state,dispatch}=useContext(FocusContext)
     const [wrong,setWrong]=useState(false)
     let content:any = num
     switch (status) {
@@ -13,25 +13,29 @@ export const Block = ({  num, status }: { num: number, status: string }) => {
             content = num;
             break;
         case 'timeout':
-            // var isLeft=state.arr.filter(v=>v!==0).includes(num)
-            // if(isLeft)
-            // content = "*";
             break;
         default:
             break;
     }
     const handleClick = () => {
-        if(status==='running'){
+        if(status.includes('running')){
             let modifiedArr=[];
-            const answer=findMin(state.arr);
+            const answer=findMin(state.arr??[]);
             if(num===answer){
-                 modifiedArr=state.arr.map((val)=>{
+                if(!state.arr)return;
+                 modifiedArr=state.arr?.map((val)=>{
                     if(val===num){
                         return 0
                     }
                     return val
                 })
-                dispatch({type:'block_click',arr:modifiedArr})
+                if(modifiedArr.every(n=>n===0)){
+                    dispatch({type:'set_game_status',status:'success',arr:modifiedArr,btnText:'well done!'})
+                }else{
+                    
+                    dispatch({type:'set_game_status',status:"running_click_success",btnText:state.btnText,arr:modifiedArr})
+                }
+                
             }else{
 
                 setWrong(true)

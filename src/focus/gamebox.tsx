@@ -13,6 +13,7 @@ export const GameBox = () => {
             <InfoBar/>
             <Bracket />
             <Records/>
+            
         </div>
     )
 }

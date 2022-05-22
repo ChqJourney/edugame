@@ -1,17 +1,19 @@
-import React, { useReducer } from 'react';
-import { GameBox } from './focus/gamebox';
-import { GameContext, initState } from './operations/GameContext';
-import { GameReducer } from './operations/GameReducer';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { CalculatorContainer } from './calculates/calculatorContainer';
+import { Focus } from './focus/focus';
+import { Portal } from './portal';
 
 function App() {
 
-  const [state, dispatch] = useReducer(GameReducer, initState);
+  
   return (
     <div className='w-full h-full'>
-      {/* <CalculatorContainer/> */}
-      <GameContext.Provider value={{ state, dispatch }}>
-        <GameBox />
-      </GameContext.Provider>
+      <Routes>
+        <Route path='/' element={<Portal/>}/>
+        <Route path="/focus" element={<Focus/>}/>
+        <Route path="/calculator" element={<CalculatorContainer/>}/>
+      </Routes>
     </div>
   );
 }
