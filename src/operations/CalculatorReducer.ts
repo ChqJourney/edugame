@@ -2,7 +2,10 @@ import { CalculatorState } from "./CalculatorContext";
 
 export type CalculatorAction =
   | { type: "set_game_status"; status: string }
-  | { type:'button_click';lastKey:any}
+  | { type:'num_click';lastKey:any}
+  |{type:'fn_createQs';calType:string;total:number}
+  |{type:'fn_return'}
+  |{type:'fn_confirm'}
 
   export const CalculatorReducer = (state: CalculatorState, action: CalculatorAction): CalculatorState => {
       switch(action.type){
@@ -11,7 +14,7 @@ export type CalculatorAction =
                   ...state,
                   status:action.status
               }
-              case 'button_click':
+              case 'num_click':
                   switch(state.status){
                       case 'input':
                           return {

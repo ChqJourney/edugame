@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import { FocusContext } from "../operations/FocusContext";
 
 export const Records=()=>{
-
     const {state,dispatch}=useContext(FocusContext)
     useEffect(()=>{
         let localRecordsStr=localStorage.getItem('records')

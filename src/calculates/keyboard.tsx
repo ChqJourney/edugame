@@ -38,7 +38,7 @@ const NarroFuncSlot=({content,fn}:{content:any,fn:string})=>{
         const statusNow=state.status
         const key=content
         if(statusNow==='input'){
-            dispatch({type:'button_click',lastKey:content})
+            dispatch({type:'fn_createQs',total:10,calType:'dig1mode'})
         }
     }
     

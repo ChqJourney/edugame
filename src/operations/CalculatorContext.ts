@@ -1,7 +1,7 @@
 import React, {Dispatch } from "react";
 import { CalculatorAction } from "./CalculatorReducer";
 
-export const initCalculatorState:CalculatorState={status:'idle',calType:'I',total:0,current:0,input:undefined};
+export const initCalculatorState:CalculatorState={status:'input',calType:'I',total:0,current:0,input:" "};
 
 export interface CalculatorReducerProps{
     state:CalculatorState
@@ -18,4 +18,9 @@ export interface CalculatorState {
     total:number
     current:number
     input:any
+  }
+
+  export enum CalStatus{
+      functioning,
+      need_input
   }
