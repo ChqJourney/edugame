@@ -54,7 +54,7 @@ const FuncSlot=({content,fn}:{content:any,fn:string})=>{
         const statusNow=state.status
         const key=content
         if(statusNow==='input'){
-            dispatch({type:'button_click',lastKey:content})
+            // dispatch({type:'button_click',lastKey:content})
         }
     }
     
@@ -68,7 +68,7 @@ const KeySlot=({content}:{content:any})=>{
     const {state,dispatch}=useContext(CalculatorContext)
     const handleClick=()=>{
         if(state.status==='input'){
-            dispatch({type:'button_click',lastKey:content})
+            // dispatch({type:'button_click',lastKey:content})
         }
     }
     return (

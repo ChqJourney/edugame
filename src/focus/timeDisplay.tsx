@@ -3,36 +3,40 @@ import { FocusContext } from '../operations/FocusContext'
 import { createRandomArray } from './bracket'
 //react-hooks/exhaustive-deps
 
-export const TimerDisplay = ({ time, status }: { time: number, status: string }) => {
+export const TimerDisplay = ({ time, status,sounder }: { time: number, status: string,sounder:(id:any)=>void }) => {
     const { state, dispatch } = useContext(FocusContext)
     const [sec, setTime] = useState(time)
-    
-
+    const [reminder,setReminder]=useState(false)
     useEffect(() => {
         let interval: any = null;
         if(state.status.includes('running')){
-            console.log('in')
             if (state.arr?.some(val => val !== 0)) 
                 if (sec !== 0) {
                     interval = setInterval(() => setTime(sec => sec - 1), 1000)
+                    if(sec<6){
+                        setReminder(true)
+                    }
                 } else {
                     clearInterval(interval)
-                    dispatch({type:'set_game_status',status:'timeout',btnText:state.btnText,arr:state.arr})
+                    sounder({id:'timeout'})
+                    setReminder(false)
+                    dispatch({type:'set_game_status',status:'timeout',btnText:'Start',arr:state.arr})
                     setTimeout(() => {
-                        dispatch({type:'set_game_status',status:'idle',btnText:'Start',arr:state.arr})
+                        dispatch({type:'set_game_status',status:'idle',leftTime:state.leftTime,arr:state.arr,btnText:'Start'})
                         dispatch({type:'set_game_parameter',roundTime:state.roundTime,dimension:state.dimension,arr:createRandomArray(state.dimension*state.dimension)})
-                        dispatch({type:'set_game_status',status:'idle',btnText:state.btnText,leftTime:0,arr:state.arr})
-                    }, 2500);
+                        
+                    }, 2000);
                 }
-            }else if(state.status==='idle'||state.status==='portal'){
+            }else if(state.status==='idle'){
             setTime(sec=>state.roundTime)
         }else if(state.status==='success'){
             setTime(sec)
+            setReminder(false)
             setTimeout(() => {
-                dispatch({type:'set_game_status',status:'idle',btnText:'Start',leftTime:state.leftTime,arr:state.arr})
+                dispatch({type:'set_game_status',status:'idle',leftTime:sec,btnText:'Start'})
                 dispatch({type:'set_game_parameter',roundTime:state.roundTime,dimension:state.dimension,arr:createRandomArray(state.dimension*state.dimension)})
-                dispatch({ type: 'set_game_status', status:'idle',btnText:'Start',leftTime: sec,arr:state.arr})
-            }, 2500);
+                // dispatch({ type: 'set_game_status', status:'idle',btnText:'Start',leftTime: sec,arr:state.arr})
+            }, 2000);
             const rs=validateAndPersistanceRecords(state.records??[],{time:state.roundTime-sec,createdAt:new Date().toLocaleString()});
             dispatch({type:'set_game_records',recordLevel:`${state.dimension} x ${state.dimension}`,records:rs})
             var level=`${state.dimension.toString()} x ${state.dimension.toString()}`
@@ -43,19 +47,17 @@ export const TimerDisplay = ({ time, status }: { time: number, status: string })
         }
         return () => clearInterval(interval)
          // eslint-disable-next-line
-    }, [sec, status])
+    }, [sec, status,time])
 
     useEffect(()=>{
         dispatch({type:'set_game_status',status:'idle',btnText:state.btnText,arr:state.arr})
          // eslint-disable-next-line
     },[time])
     return (
-        <>
-        <div className="text-lg border-4 border-sky-300 rounded-md px-2 mx-1 text-orange-500 flex items-center font-mono font-semibold">
+        <div className={`${reminder?" animate-pulse border-red-500":"border-sky-400"} text-2xl w-24 border-2 text-center rounded-md px-2 mx-1 justify-center text-lime-700 flex items-center font-sans font-semibold`}>
             {timeFormat(sec)}
         </div>
         
-        </>
     )
 }
 

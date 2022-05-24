@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
 import { FocusContext } from "../operations/FocusContext";
 
-export const Block = ({  num, status }: { num: number, status: string }) => {
+export const Block = ({  num, status,sounder }: { num: number, status: string,sounder:(id:any)=>void }) => {
     const {state,dispatch}=useContext(FocusContext)
+
+    
     const [wrong,setWrong]=useState(false)
     let content:any = num
     switch (status) {
@@ -16,28 +18,30 @@ export const Block = ({  num, status }: { num: number, status: string }) => {
             break;
         default:
             break;
-    }
+    } 
     const handleClick = () => {
-        if(status.includes('running')){
+        if(status.includes('running')&&num!==0){
             let modifiedArr=[];
             const answer=findMin(state.arr??[]);
             if(num===answer){
                 if(!state.arr)return;
-                 modifiedArr=state.arr?.map((val)=>{
+                modifiedArr=state.arr?.map((val)=>{
                     if(val===num){
                         return 0
                     }
                     return val
                 })
                 if(modifiedArr.every(n=>n===0)){
+                    sounder({id:'correct'})
+                   sounder({id:'success'})
                     dispatch({type:'set_game_status',status:'success',arr:modifiedArr,btnText:'well done!'})
                 }else{
-                    
+                    sounder({id:'correct'})
                     dispatch({type:'set_game_status',status:"running_click_success",btnText:state.btnText,arr:modifiedArr})
                 }
                 
             }else{
-
+                sounder({id:'wrong'})
                 setWrong(true)
                 setTimeout(() => {
                     setWrong(false)
@@ -47,7 +51,6 @@ export const Block = ({  num, status }: { num: number, status: string }) => {
         
     }
     if(content!==0){
-
         return (
             <button className={`square`} onClick={handleClick}>
                 <div className={`h-8 w-8 ${wrong?"shake":""}`}>

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Molly's games",
+  "name": "for my dear daughter Molly",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +18,7 @@
       "sizes": "512x512"
     }
   ],
-  
-  "start_url": "./portal.html",
+  "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"

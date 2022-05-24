@@ -8,9 +8,12 @@ export const Screen=({question}:{question:string})=>{
         <div className='w-full bg-sky-600 pb-2 pt-18'>
 
                 <Ratings/>
-            <div className=' h-full flex justify-center items-center bg-sky-800 mx-2 rounded-lg py-4 relative'>
+            <div className=' h-full flex justify-center items-center bg-sky-800 mx-2 rounded-lg py-2 relative'>
                 <div className='absolute right-6 top-1 text-xl text-lime-600'>1 / 5</div>
                 {Array.from(state.input).map((v,i)=><DisplayUnit content={v} key={i}/>)}
+                <div className='w-32 h-16 bg-sky-700 rounded-md absolute right-1 top-8'>
+                    {/* {state.clientAnswer} */}
+                </div>
             </div>
         </div>
         )
