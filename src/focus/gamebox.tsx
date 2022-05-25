@@ -15,7 +15,7 @@ export const GameBox = () => {
         'timeout':[7686,2100]
     }})
     return (
-        <div className="flex flex-col relative h-screen justify-between overflow-y-hidden lg:w-[600px] md:mx-auto">
+        <div className="flex flex-col relative justify-start justify-items-start overflow-y-hidden h-screen lg:w-[600px] md:mx-auto">
             <Title/>
             <Bracket sounder={(id:any)=>play(id)} />
             <Records/>

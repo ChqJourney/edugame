@@ -27,7 +27,7 @@ export const Controller=({sounder}:{sounder:(id:any)=>void})=>{
             <TimerDisplay sounder={sounder} time={state.roundTime} status={state.status}/>
             <DimensionSelector/>
             {/* <RoundTimeSelector/> */}
-            <button className={`mx-2 ${state.btnText==='Stop'?"text-red-600 bg-sky-600":"text-sky-600"} border font-semibold border-slate-300 rounded-md shadow-lg w-32 h-10 hover:scale-105 hover:bg-sky-300`}
+            <button className={`mx-1 ${state.btnText==='Stop'?"text-red-600 bg-sky-600":"text-sky-600"} border font-semibold border-slate-300 rounded-md shadow-lg w-32 h-10 hover:scale-105 hover:bg-sky-300`}
             onClick={()=>startAction()}>{state.btnText}</button>
             {/* <SoundPlayer play={state.soundPlay} sound={state.soundSrc??"assets/sounds/ding.mp3"}/> */}
         </div>

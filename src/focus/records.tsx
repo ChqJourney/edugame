@@ -13,7 +13,7 @@ export const Records=()=>{
     },[])
 
     return (
-        <div className="mx-2 md:mx-4 border border-pink-500 h-[12%] mt-4 rounded-md px-2 md:px-4 overflow-y-auto mb-1">
+        <div className="mx-2 md:mx-4 border-t border-lime-500 mt-4 px-2 md:px-4 overflow-y-auto mb-1">
         
         <div className="font-bold  text-sky-700">Records of {state.dimension} x {state.dimension}:</div>
         {state.records&&state.records.map((val:any,idx:number)=><Record key={idx} idx={idx}  createdAt={val.createdAt} time={val.time}/>)}

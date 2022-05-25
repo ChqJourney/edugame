@@ -5,7 +5,6 @@ import { createRandomArray } from "./bracket";
 export const DimensionSelector = () => {
     const { state, dispatch } = useContext(FocusContext)
     const handleDimensionChange = (e: any) => {
-        console.log(fitRoundTime(parseInt(e.target.value)))
         
         if (state.status !== 'running') {
             dispatch({ type: 'set_game_parameter', dimension: e.target.value, roundTime: fitRoundTime(parseInt(e.target.value)), arr: createRandomArray(e.target.value * e.target.value) })
