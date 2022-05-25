@@ -3,9 +3,9 @@ import { CalculatorState } from "./CalculatorContext";
 export type CalculatorAction =
   | { type: "set_game_status"; status: string }
   | { type:'num_click';lastKey:any}
-  |{type:'fn_createQs';calType:string;total:number,tis:string[]}
+  |{type:'fn_createQs';calType:string;total:number,tis:Pigai[]}
   |{type:'fn_return'}
-  |{type:'fn_confirm'}
+  |{type:'fn_confirm',tis:Pigai[]}
 
   export const CalculatorReducer = (state: CalculatorState, action: CalculatorAction): CalculatorState => {
       switch(action.type){
@@ -38,6 +38,7 @@ export type CalculatorAction =
                           return {
                               ...state,
                               current:state.current>state.total-1?state.current:state.current+1,
+
                               input:""
                           }
               default:
@@ -45,4 +46,12 @@ export type CalculatorAction =
                       ...state
                   }
       }
+  }
+  export interface Pigai{
+      idx?:number
+      num1:number
+      num2:number
+      operator:string
+      answer:number
+      verdict:boolean
   }

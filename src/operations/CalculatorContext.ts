@@ -1,5 +1,5 @@
 import React, {Dispatch } from "react";
-import { CalculatorAction } from "./CalculatorReducer";
+import { CalculatorAction, Pigai } from "./CalculatorReducer";
 
 export const initCalculatorState:CalculatorState={status:'idle',calType:'I',total:0,current:1,input:" ",tis:[]};
 
@@ -17,8 +17,8 @@ export interface CalculatorState {
     calType:string
     total:number
     current:number
-    tis:string[]
-    input:any
+    tis:Pigai[]
+    input:string
   }
 
   export enum CalStatus{

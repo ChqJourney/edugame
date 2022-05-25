@@ -10,7 +10,14 @@ export const Screen=({question}:{question:string})=>{
                 <Ratings/>
             <div className=' h-full flex justify-center items-center bg-sky-800 mx-2 rounded-lg py-2 relative'>
                 <div className='absolute right-6 top-1 text-xl text-lime-600'>{state.current} / {state.total}</div>
-                {state.total===0?<div className='h-24 text-lg flex items-center'>Press mode button to start</div>:Array.from(state.tis[state.current-1]).map((v,i)=><DisplayUnit content={v} key={i}/>)}
+                {state.total===0?<div className='h-24 text-lg flex items-center'>Press mode button to start</div>:(
+                    <>
+                    <DisplayUnit content={state.tis[state.current+1].num1}/>
+                    <DisplayUnit content={state.tis[state.current+1].operator}/>
+                    <DisplayUnit content={state.tis[state.current+1].num2}/>
+                    <DisplayUnit content={"="}/>
+                    </>
+                )}
                 
                     {Array.from(state.input).map((v,i)=><DisplayUnit content={v} key={i}/>)}
                 

@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { CalculatorContext } from "../operations/CalculatorContext";
+import { Pigai } from "../operations/CalculatorReducer";
 
 export const Keyboard = () => {
 
@@ -36,13 +37,19 @@ const FuncSlot = ({ content, fn }: { content: any, fn: string }) => {
         const statusNow = state.status
         switch (fn) {
             case 'mode11':
-                dispatch({ type: 'fn_createQs', total: 10, calType: 'dig1mode', tis: createRandomTis({ quantity: 10, mode: 'mode11' }) })
+                var tis11=createRandomTis({quantity:10,mode:'mode11'})
+                dispatch({ type: 'fn_createQs', total: 10, calType: 'mode11', tis: tis11 })
                 break
             case 'mode1111':
-                dispatch({ type: 'fn_createQs', total: 10, calType: 'dig1mode', tis: createRandomTis({ quantity: 10, mode: 'mode1111' }) })
+                var tis1111=createRandomTis({quantity:10,mode:'mode1111'})
+                dispatch({ type: 'fn_createQs', total: 10, calType: 'mode1111', tis: tis1111 })
                 break
             case 'confirm':
-                dispatch({ type: 'fn_confirm'})
+                var ans=parseInt(state.input)
+                if(state.tis[state.current+1].answer===ans){
+                    
+                    // dispatch({ type: 'fn_confirm',tis:state.tis.map(())})
+                }
                 break
             default:
                 break
@@ -100,27 +107,31 @@ const Power = () => {
     )
 }
 
-const createRandomTis = ({ quantity, mode }: { quantity: number, mode: string }): string[] => {
-    let result: string[] = []
+const createRandomTis = ({ quantity, mode }: { quantity: number, mode: string }): Pigai[] => {
+    let result: Pigai[] = []
     for (let index = 0; index < quantity; index++) {
-        result.push(createRandomTi({ mode }))
+        const ti=createRandomTi({ mode })
+        result.push(ti)
     }
     return result
 }
-const createRandomTi = ({ mode }: { mode: string }): string => {
+const createRandomTi = ({ mode }: { mode: string }): Pigai => {
     const operatorList = ["+", "-"]
     let operatorIdx = Math.floor((Math.random() * (1 - 0 + 1)) + 0)
     let num1: number = 0
     let num2: number = 0
+    let num3:number=0
     if (operatorIdx === 1) {
 
         num1 = Math.floor(Math.random() * (10 - 0 + 1) + 0)
         num2 = Math.floor(Math.random() * (num1 - 0 + 1) + 0)
+        num3=num1-num2
     } else if (operatorIdx === 0) {
         num1 = Math.floor(Math.random() * (10 - 0 + 1) + 0)
         num2 = Math.floor(Math.random() * (10 - num1 - 0 + 1) + 0)
+        num3=num1+num2
     } else {
 
     }
-    return `${num1}${operatorList[operatorIdx]}${num2}=`
+    return {num1:num1,num2:num2,operator:operatorList[operatorIdx],answer:num3,verdict:false}
 }
