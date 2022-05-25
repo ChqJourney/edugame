@@ -1,7 +1,7 @@
 import React, {Dispatch } from "react";
 import { CalculatorAction } from "./CalculatorReducer";
 
-export const initCalculatorState:CalculatorState={status:'input',calType:'I',total:0,current:0,input:" "};
+export const initCalculatorState:CalculatorState={status:'idle',calType:'I',total:0,current:1,input:" ",tis:[]};
 
 export interface CalculatorReducerProps{
     state:CalculatorState
@@ -17,6 +17,7 @@ export interface CalculatorState {
     calType:string
     total:number
     current:number
+    tis:string[]
     input:any
   }
 

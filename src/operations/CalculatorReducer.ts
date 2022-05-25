@@ -3,7 +3,7 @@ import { CalculatorState } from "./CalculatorContext";
 export type CalculatorAction =
   | { type: "set_game_status"; status: string }
   | { type:'num_click';lastKey:any}
-  |{type:'fn_createQs';calType:string;total:number}
+  |{type:'fn_createQs';calType:string;total:number,tis:string[]}
   |{type:'fn_return'}
   |{type:'fn_confirm'}
 
@@ -19,7 +19,7 @@ export type CalculatorAction =
                       case 'input':
                           return {
                               ...state,
-                              input:`${state.input}${action.lastKey}`
+                              input:`${state.input}${action.lastKey}`.trim()
                           }
                           
                           default:
@@ -27,6 +27,19 @@ export type CalculatorAction =
                                   ...state
                               }
                   }
+                  case 'fn_createQs':
+                      return {
+                          ...state,
+                        calType:action.calType,
+                        total:action.total,
+                        tis:action.tis
+                      }
+                      case 'fn_confirm':
+                          return {
+                              ...state,
+                              current:state.current>state.total-1?state.current:state.current+1,
+                              input:""
+                          }
               default:
                   return {
                       ...state
