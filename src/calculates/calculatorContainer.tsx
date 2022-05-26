@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import { CalculatorContext, initCalculatorState } from "../operations/CalculatorContext";
 import { CalculatorReducer } from "../operations/CalculatorReducer";
+import { Infos } from "./infos";
 import { Keyboard } from "./keyboard";
 import { Screen } from "./screen";
 
@@ -11,8 +12,9 @@ export const CalculatorContainer=()=>{
 
         <div className="container mx-auto h-screen bg-zinc-300">
             
-            <Screen question="5+5"/>
+            <Screen/>
             <Keyboard/>
+            <Infos/>
         </div>
         </CalculatorContext.Provider>
     )
