@@ -4,6 +4,7 @@ import { Ratings } from './Ratings'
 
 export const Screen=({question}:{question:string})=>{
     const {state,dispatch} = useContext(CalculatorContext)
+    console.log(state.tis)
     return (
         <div className='w-full bg-sky-600 pb-2 pt-18'>
 
@@ -12,10 +13,10 @@ export const Screen=({question}:{question:string})=>{
                 <div className='absolute right-6 top-1 text-xl text-lime-600'>{state.current} / {state.total}</div>
                 {state.total===0?<div className='h-24 text-lg flex items-center'>Press mode button to start</div>:(
                     <>
-                    <DisplayUnit content={state.tis[state.current+1].num1}/>
-                    <DisplayUnit content={state.tis[state.current+1].operator}/>
-                    <DisplayUnit content={state.tis[state.current+1].num2}/>
-                    <DisplayUnit content={"="}/>
+                    <DisplayUnit content={state.tis[state.current-1]?.num1??" "}/>
+                    <DisplayUnit content={state.tis[state.current-1]?.operator??" "}/>
+                    <DisplayUnit content={state.tis[state.current-1]?.num2??" "}/>
+                    <DisplayUnit content={state.tis[state.current-1]?"=":""}/>
                     </>
                 )}
                 

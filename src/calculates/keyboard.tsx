@@ -3,13 +3,13 @@ import { CalculatorContext } from "../operations/CalculatorContext";
 import { Pigai } from "../operations/CalculatorReducer";
 
 export const Keyboard = () => {
-
+    const { state } = useContext(CalculatorContext)
     return (
         <div className="grid grid-cols-3 gap-4 pt-6 px-2 justify-items-center pb-[33%]">
             
             <FuncSlot content={"1+1"} fn="mode11" />
             <FuncSlot content={"11+11"} fn="mode1111" />
-            <FuncSlot content={"OK"} fn="confirm" />
+            <FuncSlot content={state.total} fn="confirm" />
 
             <KeySlot content={1} />
             <KeySlot content={2} />
@@ -24,7 +24,7 @@ export const Keyboard = () => {
             <KeySlot content={9} />
             <FuncSlot content={<ArrowLeft />} fn="previous" />
             <KeySlot content={0} />
-            <FuncSlot content={<ArrowRight />} fn="next" />
+            <FuncSlot content={"OK"} fn="confirm" />
 
 
         </div>
@@ -46,9 +46,19 @@ const FuncSlot = ({ content, fn }: { content: any, fn: string }) => {
                 break
             case 'confirm':
                 var ans=parseInt(state.input)
-                if(state.tis[state.current+1].answer===ans){
-                    
-                    // dispatch({ type: 'fn_confirm',tis:state.tis.map(())})
+                if(state.tis[state.current-1].answer===ans){
+                    const modified=state.tis.map((v,i)=>{
+                        if(i===state.current-1){
+                            v.verdict=true
+                            return v
+                        }else{
+                            return v
+                        }
+                    })
+
+                    dispatch({ type: 'fn_confirm',tis:state.current===state.total?[]:modified})
+                }else{
+                    console.log('wrong')
                 }
                 break
             default:

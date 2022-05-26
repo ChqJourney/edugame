@@ -37,8 +37,8 @@ export type CalculatorAction =
                       case 'fn_confirm':
                           return {
                               ...state,
-                              current:state.current>state.total-1?state.current:state.current+1,
-
+                              current:state.current>state.total-1?1:state.current+1,
+                              tis:action.tis,
                               input:""
                           }
               default:

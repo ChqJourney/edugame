@@ -1,7 +1,7 @@
 import React, {Dispatch } from "react";
 import { CalculatorAction, Pigai } from "./CalculatorReducer";
 
-export const initCalculatorState:CalculatorState={status:'idle',calType:'I',total:0,current:1,input:" ",tis:[]};
+export const initCalculatorState:CalculatorState={status:'idle',calType:'I',total:10,current:1,input:" ",tis:[]};
 
 export interface CalculatorReducerProps{
     state:CalculatorState
