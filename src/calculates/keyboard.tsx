@@ -22,7 +22,7 @@ export const Keyboard = () => {
             <KeySlot content={7} />
             <KeySlot content={8} />
             <KeySlot content={9} />
-            <FuncSlot content={<ArrowLeft />} fn="previous" />
+            <FuncSlot content={<ArrowLeft />} fn="delete" />
             <KeySlot content={0} />
             <FuncSlot content={"OK"} fn="confirm" />
 
@@ -59,8 +59,12 @@ const FuncSlot = ({ content, fn }: { content: any, fn: string }) => {
                     dispatch({ type: 'fn_confirm',tis:state.current===state.total?[]:modified})
                 }else{
                     console.log('wrong')
+                    dispatch({type:'fn_clear'})
                 }
                 break
+                case 'delete':
+                    dispatch({type:'fn_delete'})
+                    break
             default:
                 break
         }
@@ -127,9 +131,11 @@ const createRandomTis = ({ quantity, mode }: { quantity: number, mode: string })
 }
 const createRandomTi = ({ mode }: { mode: string }): Pigai => {
     const operatorList = ["+", "-"]
+
     let operatorIdx = Math.floor((Math.random() * (1 - 0 + 1)) + 0)
-    let num1: number = 0
-    let num2: number = 0
+
+    let num1: number =0
+    let num2: number =0
     let num3:number=0
     if (operatorIdx === 1) {
 
@@ -138,7 +144,7 @@ const createRandomTi = ({ mode }: { mode: string }): Pigai => {
         num3=num1-num2
     } else if (operatorIdx === 0) {
         num1 = Math.floor(Math.random() * (10 - 0 + 1) + 0)
-        num2 = Math.floor(Math.random() * (10 - num1 - 0 + 1) + 0)
+        num2 = Math.floor(Math.random() * (10 - num1 - 0 + 1) +0)
         num3=num1+num2
     } else {
 

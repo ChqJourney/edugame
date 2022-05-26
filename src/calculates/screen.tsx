@@ -30,7 +30,7 @@ export const Screen=({question}:{question:string})=>{
 const DisplayUnit=({content}:{content:any})=>{
 
     return (
-        <div className='h-24 w-12 text-2xl font-sans text-white flex justify-center items-center'>
+        <div className='h-24 w-6 text-2xl font-sans text-white flex justify-center items-center'>
             {content}
         </div>
     )
