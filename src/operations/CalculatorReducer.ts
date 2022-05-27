@@ -8,7 +8,8 @@ export type CalculatorAction =
   |{type:"fn_mode"}
   |{type:"fn_quantity"}
   |{type:"fn_clear"}
-  | { type: "fn_confirm"; tis: Pigai[] };
+  | { type: "fn_confirm"; tis: Pigai[] }
+  |{type:'submit'}
 
 export const CalculatorReducer = (
   state: CalculatorState,
@@ -46,6 +47,10 @@ export const CalculatorReducer = (
             ...state,
           };
       }
+      case "submit":
+        return {
+          ...state
+        }
     case "fn_createQs":
       return {
         ...state,
@@ -80,5 +85,5 @@ export interface Pigai {
   num2: number;
   operator: string;
   answer: number;
-  verdict: boolean;
+  verdict?: boolean;
 }

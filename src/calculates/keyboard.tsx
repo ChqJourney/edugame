@@ -8,7 +8,7 @@ export const Keyboard = () => {
         <div className="grid grid-cols-3 gap-4 pt-6 px-2 justify-items-center pb-[33%]">
             <FuncSlot content={`${state.calType}`} fn="mode" />
             <FuncSlot content={`${state.total} 题`} fn="quantity" />
-            <FuncSlot content={state.status==="idle"?"Start":"Stop"} fn="power" />
+            <FuncSlot content={state.status === "idle" ? "Start" : "Stop"} fn="power" />
 
             <KeySlot content={1} />
             <KeySlot content={2} />
@@ -24,7 +24,7 @@ export const Keyboard = () => {
             <FuncSlot content={<Delete />} fn="delete" />
             <KeySlot content={0} />
             <FuncSlot content={"OK"} fn="confirm" />
-<button className=" border w-full border-teal-700 shadow-md h-16 rounded-md col-span-3">Submit</button>
+            <button className=" border w-full border-teal-700 shadow-md h-16 rounded-md col-span-3">Submit</button>
 
         </div>
     )
@@ -35,14 +35,14 @@ const FuncSlot = ({ content, fn }: { content: any, fn: string }) => {
     const handleClick = () => {
         switch (fn) {
             case 'power':
-                if(state.status==="idle"){
+                if (state.status === "idle") {
 
                     var tis = createRandomTis({ quantity: state.total, mode: state.calType })
                     dispatch({ type: 'fn_createQs', tis: tis })
-                    dispatch({type:'set_game_status'})
-                }else{
+                    dispatch({ type: 'set_game_status' })
+                } else {
                     dispatch({ type: 'fn_createQs', tis: [] })
-                    dispatch({type:'set_game_status'})
+                    dispatch({ type: 'set_game_status' })
                 }
                 break
             case 'mode':
@@ -52,21 +52,27 @@ const FuncSlot = ({ content, fn }: { content: any, fn: string }) => {
                 dispatch({ type: 'fn_quantity' })
                 break
             case 'confirm':
-                var ans = parseInt(state.input)
-                if (state.tis[state.current - 1].answer === ans) {
-                    const modified = state.tis.map((v, i) => {
+                if(state.tis[state.current-1]?.verdict!==true){
+                    var ans = parseInt(state.input)
+                    let modified = state.tis
+                    modified = state.tis.map((v, i) => {
                         if (i === state.current - 1) {
-                            v.verdict = true
+                            
+                            if (state.tis[state.current - 1].answer === ans) {
+                                
+                                v.verdict = true
+                            } else {
+                                v.verdict = false
+                            }
                             return v
                         } else {
                             return v
                         }
                     })
-
-                    dispatch({ type: 'fn_confirm', tis: state.current === state.total ? [] : modified })
-                } else {
-                    console.log('wrong')
-                    dispatch({ type: 'fn_clear' })
+                    dispatch({ type: 'fn_confirm', tis: modified })
+                }else{
+                    dispatch({type:"fn_confirm",tis:state.tis})
+                    
                 }
                 break
             case 'delete':
@@ -75,7 +81,7 @@ const FuncSlot = ({ content, fn }: { content: any, fn: string }) => {
             default:
                 break
         }
-        
+
     }
 
     return (
@@ -166,8 +172,8 @@ const createRandomTi = ({ mode }: { mode: string }): Pigai => {
     }
 
     if (operatorIdx === 1) {
-        num1 = Math.ceil(Math.random() * bigNum) 
-        num2 = Math.ceil(Math.random() * num1) 
+        num1 = Math.ceil(Math.random() * bigNum)
+        num2 = Math.ceil(Math.random() * num1)
         num3 = num1 - num2
     } else if (operatorIdx === 0) {
         num1 = Math.ceil(Math.random() * bigNum)
@@ -176,5 +182,5 @@ const createRandomTi = ({ mode }: { mode: string }): Pigai => {
     } else {
 
     }
-    return { num1: num1, num2: num2, operator: operatorList[operatorIdx], answer: num3, verdict: false }
+    return { num1: num1, num2: num2, operator: operatorList[operatorIdx], answer: num3, verdict: undefined }
 }
