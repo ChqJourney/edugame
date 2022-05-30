@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const Portal=()=>{
+    const [userName,setUserName]=useState("")
+    const [isShowInput,setShowInput]=useState(false)
+    useEffect(()=>{
+        setUserName(localStorage.getItem('user')??"")
+    },[])
 
+    const saveAction=()=>{
+        localStorage.removeItem('user')
+        localStorage.setItem('user',userName)
+        setShowInput(false)
+    }
     return (
-        <div className="w-scree h-screen bg-sky-300 py-24">
-            <div className="text-3xl font-sans text-gray-800 text-center py-12">Game center</div>
+        <div className="w-scree h-screen bg-sky-300 py-12">
+            <div className="w-full flex justify-center">
+            <button className={`${isShowInput?"hidden":""} text-3xl font-serif text-center py-8 text-pink-400`} onClick={()=>setShowInput(true)}>{userName===""?"who are you?":userName}</button>
+            <div className={`${isShowInput?"":"hidden"} text-xl font-serif text-center py-8 text-pink-400 flex relative`}>
+                <input type="text" value={userName} onChange={(e)=>setUserName(e.target.value)} placeholder="please input your name" className="h-10 w-64 px-2 outline-0 rounded-md"></input>
+                <button className="w-16 h-10 bg-zinc-400 shadow-md rounded-md mx-2" onClick={saveAction}>Save</button>
+            </div>
+
+            </div>
             <div className="flex flex-col justify-center items-center space-y-2">
 
             <a  href="/focus" className="w-48 h-32 rounded-md bg-orange-500 flex-col text-center flex items-center justify-center">

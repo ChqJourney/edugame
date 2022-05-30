@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FocusContext } from "../operations/FocusContext";
 
-export const Block = ({  num, status,sounder }: { num: number, status: string,sounder:(id:any)=>void }) => {
+export const Block = ({  num, status,sounder }: { num: number, status: string ,sounder:({id}:{id:string})=>void}) => {
     const {state,dispatch}=useContext(FocusContext)
 
     

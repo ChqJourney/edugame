@@ -1,14 +1,28 @@
 import React, { useReducer } from 'react'
-import { FocusContext, initState } from '../operations/FocusContext'
-import { FocusReducer } from '../operations/FocusReducer';
+import useSound from 'use-sound';
+import { FocusContext } from '../operations/FocusContext'
+import { FocusReducer, FocusState } from '../operations/FocusReducer';
+import { createRandomArray } from './bracket';
 import { GameBox } from './gamebox'
 
-export const Focus=()=>{
-  console.log('redner foucs')
-    const [state, dispatch] = useReducer(FocusReducer, initState);
-    return (
-        <FocusContext.Provider value={{ state, dispatch }}>
-        <GameBox />
-      </FocusContext.Provider>
-    )
+export const Focus = () => {
+
+  const initState: FocusState =
+  {
+    userName:localStorage.getItem('user')??"Hi friend~",
+    status: 'idle',
+    roundTime: 30, 
+    btnText: 'Start', 
+    dimension: 3, 
+    arr: createRandomArray(9), 
+    leftTime: 10000, 
+    recordLevel: "3 x 3", 
+    records: [], 
+  };
+  const [state, dispatch] = useReducer(FocusReducer, initState);
+  return (
+    <FocusContext.Provider value={{ state, dispatch }}>
+      <GameBox />
+    </FocusContext.Provider>
+  )
 }

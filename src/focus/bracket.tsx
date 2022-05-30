@@ -3,7 +3,7 @@ import { FocusContext } from "../operations/FocusContext";
 import { Block } from "./block";
 import { Controller } from "./controller";
 
-export const Bracket = ({sounder}:{sounder:(id:any)=>void}) => {
+export const Bracket = ({sounder}:{sounder:({id}:{id:string})=>void}) => {
     const { state } = useContext(FocusContext)
     return (
         <div className="mt-1">
@@ -11,7 +11,7 @@ export const Bracket = ({sounder}:{sounder:(id:any)=>void}) => {
         <div className="mx-2 grow md:mx-4">
             
 
-            <Blocks arr={state.arr??[]} sounder={sounder} dimension={state.dimension} status={state.status} />
+            <Blocks sounder={sounder} arr={state.arr??[]}  dimension={state.dimension} status={state.status} />
         </div>
             </div>
     )
@@ -28,12 +28,12 @@ export function createRandomArray(num:number):number[]{
     return arr
 }
 
-export const Blocks = ({ dimension, status,arr,sounder }: { dimension: number, status: string,arr:number[],sounder:(id:any)=>void }) => {
+export const Blocks = ({ dimension, status,arr,sounder }: { dimension: number, status: string,arr:number[],sounder:({id}:{id:string})=>void }) => {
     const cols=dimension;
     
     return (
         <div style={{display:"grid",gridTemplateColumns:`repeat(${cols}, minmax(0, 1fr))`,gap:"10px"}}>
-            {arr.map((val, idx) => <Block key={idx} sounder={sounder} status={status} num={val} />)}
+            {arr.map((val, idx) => <Block sounder={sounder} key={idx} status={status} num={val} />)}
         </div>
     )
 }

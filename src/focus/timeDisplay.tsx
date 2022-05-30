@@ -3,7 +3,7 @@ import { FocusContext } from '../operations/FocusContext'
 import { createRandomArray } from './bracket'
 //react-hooks/exhaustive-deps
 
-export const TimerDisplay = ({ time, status,sounder }: { time: number, status: string,sounder:(id:any)=>void }) => {
+export const TimerDisplay = ({ time, status,sounder }: { time: number, status: string,sounder:({id}:{id:string})=>void}) => {
     const { state, dispatch } = useContext(FocusContext)
     const [sec, setTime] = useState(time)
     const [reminder,setReminder]=useState(false)
@@ -35,15 +35,15 @@ export const TimerDisplay = ({ time, status,sounder }: { time: number, status: s
             setTimeout(() => {
                 dispatch({type:'set_game_status',status:'idle',leftTime:sec,btnText:'Start'})
                 dispatch({type:'set_game_parameter',roundTime:state.roundTime,dimension:state.dimension,arr:createRandomArray(state.dimension*state.dimension)})
-                // dispatch({ type: 'set_game_status', status:'idle',btnText:'Start',leftTime: sec,arr:state.arr})
+              
             }, 2000);
-            const rs=validateAndPersistanceRecords(state.records??[],{time:state.roundTime-sec,createdAt:new Date().toLocaleString()});
+            const rs=validateAndPersistanceRecords(state.records??[],{time:state.roundTime-sec,createdAt:new Date().toLocaleString(),user:state.userName});
             dispatch({type:'set_game_records',recordLevel:`${state.dimension} x ${state.dimension}`,records:rs})
             var level=`${state.dimension.toString()} x ${state.dimension.toString()}`
-            var str=localStorage.getItem('records');
+            var str=localStorage.getItem('records-focus');
             let obj:any=str?JSON.parse(str):{}
             obj[level]=[...rs]
-            localStorage.setItem('records',JSON.stringify(obj))
+            localStorage.setItem('records-focus',JSON.stringify(obj))
         }
         return () => clearInterval(interval)
          // eslint-disable-next-line

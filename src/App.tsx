@@ -1,11 +1,15 @@
 import React from 'react';
+import ReactModal from 'react-modal';
 import { Route, Routes } from 'react-router-dom';
+import useSound from 'use-sound';
 import { CalculatorContainer } from './calculates/calculatorContainer';
 import { Focus } from './focus/focus';
 import { Portal } from './portal';
 
-function App() {
+ReactModal.setAppElement("#root")
 
+function App() {
+  
   
   return (
     <div className='w-full h-full'>

@@ -1,39 +1,91 @@
 import { CalculatorState } from "./CalculatorContext";
 
 export type CalculatorAction =
-  | { type: "set_game_status" }
+  | { type: "set_game_status"; status: string; tis?: Pigai[] }
   | { type: "num_click"; lastKey: any }
   | { type: "fn_createQs"; tis: Pigai[] }
   | { type: "fn_delete" }
-  |{type:"fn_mode"}
-  |{type:"fn_quantity"}
-  |{type:"fn_clear"}
+  | { type: "fn_mode" }
+  | { type: "fn_quantity" }
+  | { type: "fn_clear" }
   | { type: "fn_confirm"; tis: Pigai[] }
-  |{type:'submit'}
+  | { type: "fn_setCurrent"; current: number }
+  | { type: "fn_success" }
+  | { type: "fn_msg"; modal?: any; showMsg: boolean }
+  | { type: "fn_setDuration"; duration: number }
+  | { type: "fn_reset" }
+  | { type: "fn_flashStar" }
+  | { type: "fn_setRecords"; infos: any[] };
 
 export const CalculatorReducer = (
   state: CalculatorState,
   action: CalculatorAction
 ): CalculatorState => {
+  const level = ["简单", "普通", "困难"];
+  const roundTimeArr = [60, 90, 120];
   switch (action.type) {
-
+    case "fn_setRecords":
+      return {
+        ...state,
+        infos:action.infos
+      }
+    case "fn_flashStar":
+      return { ...state, status: "closeEnd" };
+    case "fn_reset":
+      return {
+        ...state,
+        status: "idle",
+        current: 1,
+        tis: [],
+        input: " ",
+      };
+    case "fn_msg":
+      return {
+        ...state,
+        showMsg: action.showMsg,
+        modal: action.modal,
+      };
     case "set_game_status":
       return {
         ...state,
-        status: state.status==="idle"?"running":"idle"
+        status: action.status,
       };
-      case "fn_mode":
-        const level=["简单","普通","困难"]
-        const idx=level.findIndex(v=>v===state.calType)
+    case "fn_mode":
+      if (state.status === "idle") {
+        const idx = level.findIndex((v) => v === state.calType);
+        const newIdx = idx === level.length - 1 ? 0 : idx + 1;
+        const newCalType = idx === level.length - 1 ? level[0] : level[idx + 1];
+        const newRoundTime = (roundTimeArr[newIdx] * state.total) / 10;
         return {
           ...state,
-          calType:idx===level.length-1?level[0]:level[idx+1]
-        }
-      case "fn_quantity":
+          calType: newCalType,
+          roundTime: newRoundTime,
+          infos:JSON.parse(localStorage.getItem("records-calculator")??"")[`${newCalType}${state.total}`]
+        };
+
+      } else {
         return {
           ...state,
-          total:state.total===50?10:state.total+10
-        }
+        };
+      }
+    case "fn_quantity":
+      if (state.status === "idle") {
+        const idxMode = level.findIndex((v) => v === state.calType);
+        const newQuantity = state.total === 50 ? 10 : state.total + 10;
+        return {
+          ...state,
+          total: newQuantity,
+          roundTime: (roundTimeArr[idxMode] * newQuantity) / 10,
+          infos:JSON.parse(localStorage.getItem("records-calculator")??"")[`${state.calType}${newQuantity}`]
+        };
+      } else {
+        return { ...state };
+      }
+    case "fn_setCurrent":
+      return {
+        ...state,
+        current: action.current,
+      };
     case "num_click":
       switch (state.status) {
         case "running":
@@ -47,10 +99,12 @@ export const CalculatorReducer = (
             ...state,
           };
       }
-      case "submit":
-        return {
-          ...state
-        }
+    case "fn_setDuration":
+      return {
+        ...state,
+        duration: action.duration,
+      };
+
     case "fn_createQs":
       return {
         ...state,
@@ -68,11 +122,11 @@ export const CalculatorReducer = (
         ...state,
         input: state.input.substr(0, state.input.length - 1),
       };
-      case "fn_clear":
-          return {
-              ...state,
-              input:""
-          }
+    case "fn_clear":
+      return {
+        ...state,
+        input: "",
+      };
     default:
       return {
         ...state,

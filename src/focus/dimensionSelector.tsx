@@ -9,7 +9,7 @@ export const DimensionSelector = () => {
         if (state.status !== 'running') {
             dispatch({ type: 'set_game_parameter', dimension: e.target.value, roundTime: fitRoundTime(parseInt(e.target.value)), arr: createRandomArray(e.target.value * e.target.value) })
         }
-        dispatch({ type: 'set_game_records', recordLevel: `${e.target.value} x ${e.target.value}`, records: JSON.parse(localStorage.getItem('records') ?? "")[`${e.target.value} x ${e.target.value}`] })
+        dispatch({ type: 'set_game_records', recordLevel: `${e.target.value} x ${e.target.value}`, records: JSON.parse(localStorage.getItem('records-focus') ?? "")[`${e.target.value} x ${e.target.value}`] })
     }
     return (
         <select className="w-28 border outline-none rounded-md pl-4 mx-1 cursor-pointer hover:scale-105" onChange={e => handleDimensionChange(e)}>
@@ -21,7 +21,6 @@ export const DimensionSelector = () => {
     )
 }
 function fitRoundTime(di: number): number {
-    console.log(di)
     switch (di) {
         case 3:
             return 30

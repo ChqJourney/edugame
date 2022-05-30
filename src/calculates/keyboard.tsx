@@ -1,48 +1,48 @@
 import React, { useContext } from "react";
+import { validateAndPersistanceRecords } from "../focus/timeDisplay";
 import { CalculatorContext } from "../operations/CalculatorContext";
 import { Pigai } from "../operations/CalculatorReducer";
 
-export const Keyboard = () => {
+export const Keyboard = ({sounder}:{sounder:(id:any)=>void}) => {
     const { state } = useContext(CalculatorContext)
     return (
-        <div className="grid grid-cols-3 gap-4 pt-6 px-2 justify-items-center pb-[33%]">
-            <FuncSlot content={`${state.calType}`} fn="mode" />
-            <FuncSlot content={`${state.total} 题`} fn="quantity" />
-            <FuncSlot content={state.status === "idle" ? "Start" : "Stop"} fn="power" />
+        <div className="grid grid-cols-3 gap-4 pt-6 px-2 text-indigo-600 justify-items-center">
+           
+            <FuncSlot content={`${state.calType}`} fn="mode" sounder={sounder}/>
+            <FuncSlot content={`${state.total} 题`} fn="quantity" sounder={sounder}/>
+            <FuncSlot content={state.status === "idle" ? "开始" : "退出"} fn="power" sounder={sounder}/>
 
-            <KeySlot content={1} />
-            <KeySlot content={2} />
-            <KeySlot content={3} />
+            <KeySlot content={1} sounder={sounder}/>
+            <KeySlot content={2} sounder={sounder}/>
+            <KeySlot content={3} sounder={sounder}/>
 
-            <KeySlot content={4} />
-            <KeySlot content={5} />
-            <KeySlot content={6} />
+            <KeySlot content={4} sounder={sounder}/>
+            <KeySlot content={5} sounder={sounder}/>
+            <KeySlot content={6} sounder={sounder}/>
 
-            <KeySlot content={7} />
-            <KeySlot content={8} />
-            <KeySlot content={9} />
-            <FuncSlot content={<Delete />} fn="delete" />
-            <KeySlot content={0} />
-            <FuncSlot content={"OK"} fn="confirm" />
-            <button className=" border w-full border-teal-700 shadow-md h-16 rounded-md col-span-3">Submit</button>
+            <KeySlot content={7} sounder={sounder}/>
+            <KeySlot content={8} sounder={sounder}/>
+            <KeySlot content={9} sounder={sounder}/>
+            <FuncSlot content={<Delete />} fn="delete"  sounder={sounder}/>
+            <KeySlot content={0} sounder={sounder}/>
+            <FuncSlot content={"OK"} fn="confirm" sounder={sounder}/>
 
         </div>
     )
 }
 
-const FuncSlot = ({ content, fn }: { content: any, fn: string }) => {
+const FuncSlot = ({ content, fn,sounder }: { content: any, fn: string,sounder:({id}:{id:string})=>void }) => {
     const { state, dispatch } = useContext(CalculatorContext)
     const handleClick = () => {
         switch (fn) {
             case 'power':
                 if (state.status === "idle") {
-
-                    var tis = createRandomTis({ quantity: state.total, mode: state.calType })
-                    dispatch({ type: 'fn_createQs', tis: tis })
-                    dispatch({ type: 'set_game_status' })
+                    
+                    dispatch({type:'fn_msg',modal:<ConfirmModal sounder={sounder}/>,showMsg:!state.showMsg})
+                    
                 } else {
-                    dispatch({ type: 'fn_createQs', tis: [] })
-                    dispatch({ type: 'set_game_status' })
+                    dispatch({type:'fn_msg',modal:<CancelModal sounder={sounder}/>,showMsg:!state.showMsg})
+                   
                 }
                 break
             case 'mode':
@@ -50,18 +50,19 @@ const FuncSlot = ({ content, fn }: { content: any, fn: string }) => {
                 break
             case 'quantity':
                 dispatch({ type: 'fn_quantity' })
-                break
+               break
             case 'confirm':
+                let modified = state.tis
                 if(state.tis[state.current-1]?.verdict!==true){
                     var ans = parseInt(state.input)
-                    let modified = state.tis
                     modified = state.tis.map((v, i) => {
                         if (i === state.current - 1) {
                             
                             if (state.tis[state.current - 1].answer === ans) {
-                                
+                                sounder({id:'correct'})
                                 v.verdict = true
                             } else {
+                                sounder({id:'wrong'})
                                 v.verdict = false
                             }
                             return v
@@ -70,8 +71,19 @@ const FuncSlot = ({ content, fn }: { content: any, fn: string }) => {
                         }
                     })
                     dispatch({ type: 'fn_confirm', tis: modified })
+                    
                 }else{
                     dispatch({type:"fn_confirm",tis:state.tis})
+                    
+                }
+                if(modified.every(m=>m.verdict===true)){
+                    dispatch({type:'set_game_status',status:'success'})
+                    sounder({id:'success'})
+                    setTimeout(()=>{
+                        dispatch({type:'set_game_status',status:'idle'})
+                        dispatch({type:'fn_reset'})
+                       
+                    },2000)
                     
                 }
                 break
@@ -85,22 +97,21 @@ const FuncSlot = ({ content, fn }: { content: any, fn: string }) => {
     }
 
     return (
-        <button onClick={handleClick} className="border-2 border-teal-600 shadow-md w-full sm:w-36 h-20 rounded-md flex justify-center items-center">
+        <button onClick={handleClick} className="border-2 border-teal-600 sm:text-4xl shadow-md w-full sm:w-full h-16 sm:h-24 rounded-md flex justify-center items-center">
             {content}
         </button>
     )
 }
-const KeySlot = ({ content }: { content: any }) => {
+const KeySlot = ({ content,sounder }: { content: any,sounder:({id}:{id:string})=>void }) => {
     const { state, dispatch } = useContext(CalculatorContext)
     const handleClick = () => {
-        console.log('in')
         if (state.status === 'running') {
-            console.log(content)
+            sounder({id:'correct'})
             dispatch({ type: 'num_click', lastKey: content })
         }
     }
     return (
-        <button onClick={handleClick} className="border-2 border-teal-500 shadow-md w-full sm:w-36 h-16 rounded-md flex justify-center items-center">
+        <button onClick={handleClick} className="border-2 sm:text-5xl border-teal-500 shadow-md w-full sm:w-full h-16 sm:h-24 rounded-md flex justify-center items-center">
             {content}
         </button>
     )
@@ -135,7 +146,7 @@ const Power = () => {
 }
 const Delete = () => {
     return (
-        <svg className="h-8 w-8" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2882" width="200" height="200"><path d="M874.666667 202.666667H360.533333c-21.333333 0-40.533333 8.533333-55.466666 23.466666l-217.6 234.666667c-25.6 27.733333-25.6 72.533333 0 100.266667l217.6 234.666666c14.933333 14.933333 34.133333 23.466667 55.466666 23.466667H874.666667c40.533333 0 74.666667-34.133333 74.666666-74.666667V277.333333c0-40.533333-34.133333-74.666667-74.666666-74.666666z m10.666666 544c0 6.4-4.266667 10.666667-10.666666 10.666666H360.533333c-2.133333 0-6.4-2.133333-8.533333-4.266666l-217.6-234.666667c-4.266667-4.266667-4.266667-10.666667 0-14.933333l217.6-234.666667c2.133333-2.133333 4.266667-4.266667 8.533333-4.266667H874.666667c6.4 0 10.666667 4.266667 10.666666 10.666667V746.666667z" p-id="2883"></path><path d="M684.8 403.2c-12.8-12.8-32-12.8-44.8 0l-64 64-61.866667-61.866667c-12.8-12.8-32-12.8-44.8 0-12.8 12.8-12.8 32 0 44.8l61.866667 61.866667-61.866667 61.866667c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.933333 8.533333 23.466667 8.533333s17.066667-2.133333 23.466667-8.533333l61.866666-61.866667L640 618.666667c6.4 6.4 14.933333 8.533333 23.466667 8.533333s17.066667-2.133333 23.466666-8.533333c12.8-12.8 12.8-32 0-44.8L620.8 512l61.866667-61.866667c12.8-12.8 12.8-34.133333 2.133333-46.933333z" p-id="2884"></path></svg>
+        <svg className="h-8 w-8 fill-teal-600" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2882" width="200" height="200"><path d="M874.666667 202.666667H360.533333c-21.333333 0-40.533333 8.533333-55.466666 23.466666l-217.6 234.666667c-25.6 27.733333-25.6 72.533333 0 100.266667l217.6 234.666666c14.933333 14.933333 34.133333 23.466667 55.466666 23.466667H874.666667c40.533333 0 74.666667-34.133333 74.666666-74.666667V277.333333c0-40.533333-34.133333-74.666667-74.666666-74.666666z m10.666666 544c0 6.4-4.266667 10.666667-10.666666 10.666666H360.533333c-2.133333 0-6.4-2.133333-8.533333-4.266666l-217.6-234.666667c-4.266667-4.266667-4.266667-10.666667 0-14.933333l217.6-234.666667c2.133333-2.133333 4.266667-4.266667 8.533333-4.266667H874.666667c6.4 0 10.666667 4.266667 10.666666 10.666667V746.666667z" p-id="2883"></path><path d="M684.8 403.2c-12.8-12.8-32-12.8-44.8 0l-64 64-61.866667-61.866667c-12.8-12.8-32-12.8-44.8 0-12.8 12.8-12.8 32 0 44.8l61.866667 61.866667-61.866667 61.866667c-12.8 12.8-12.8 32 0 44.8 6.4 6.4 14.933333 8.533333 23.466667 8.533333s17.066667-2.133333 23.466667-8.533333l61.866666-61.866667L640 618.666667c6.4 6.4 14.933333 8.533333 23.466667 8.533333s17.066667-2.133333 23.466666-8.533333c12.8-12.8 12.8-32 0-44.8L620.8 512l61.866667-61.866667c12.8-12.8 12.8-34.133333 2.133333-46.933333z" p-id="2884"></path></svg>
     )
 }
 
@@ -183,4 +194,54 @@ const createRandomTi = ({ mode }: { mode: string }): Pigai => {
 
     }
     return { num1: num1, num2: num2, operator: operatorList[operatorIdx], answer: num3, verdict: undefined }
+}
+
+const ConfirmModal=({sounder}:{sounder:({id}:{id:string})=>void})=>{
+    const {state,dispatch}=useContext(CalculatorContext)
+
+    const startAct=()=>{
+        var tis = createRandomTis({ quantity: state.total, mode: state.calType })
+        setTimeout(()=>{
+
+            dispatch({ type: 'fn_createQs', tis: tis })
+            dispatch({ type: 'set_game_status',status:"running" })
+        },2300)
+        dispatch({type:'fn_msg',showMsg:false})
+        sounder({id:'start'})
+    }
+
+    return (
+        <div className="bg-zinc-400 w-48 h-36 rounded-md relative flex flex-col justify-center items-center">
+                    <button className="absolute top-1 right-3" onClick={()=>dispatch({type:'fn_msg',showMsg:false})}>X</button>
+                    <div className="text-lg text-red-500 font-semibold mb-2">开始吗？</div>
+                    <div className="flex space-x-2">
+                    <button className="w-16 h-10 rounded-md left-2 bg-orange-500" onClick={()=>startAct()}>确定</button>
+                    <button className="w-16 h-10 rounded-md right-2 bg-stone-500" onClick={()=>dispatch({type:'fn_msg',showMsg:false})}>取消</button>
+                    </div>
+                </div>
+    )
+}
+
+const CancelModal=({sounder}:{sounder:({id}:{id:string})=>void})=>{
+    const {state,dispatch}=useContext(CalculatorContext)
+
+    const cancelAct=()=>{
+        
+        dispatch({ type: 'fn_createQs', tis: [] })
+        dispatch({type:'fn_clear'})
+        dispatch({ type: 'set_game_status',status:'idle' })
+        dispatch({type:'fn_msg',showMsg:false})
+    }
+
+    return (
+        <div className="bg-zinc-400 w-48 h-36 rounded-md relative flex flex-col justify-center items-center">
+                    <button className="absolute top-1 right-3" onClick={()=>dispatch({type:'fn_msg',showMsg:false})}>X</button>
+                    <div className="text-lg text-red-500 font-semibold mb-2" >取消吗？</div>
+                    <div className="flex space-x-2">
+
+                    <button className="w-16 h-10 rounded-md left-2 bg-orange-500" onClick={()=>cancelAct()}>确定</button>
+                    <button className="w-16 h-10 rounded-md right-2 bg-stone-500" onClick={()=>dispatch({type:'fn_msg',showMsg:false})}>取消</button>
+                    </div>
+                </div>
+    )
 }

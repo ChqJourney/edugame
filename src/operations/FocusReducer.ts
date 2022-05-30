@@ -1,4 +1,5 @@
 export interface FocusState {
+  userName:string;
   status: string;
   btnText?: string;
   roundTime: number;
@@ -21,7 +22,7 @@ export type Action =
       dimension: number;
       arr: any[];
     }
-  | { type: "set_game_records"; records: any[],recordLevel:string };
+  | { type: "set_game_records"; records: any[],recordLevel:string }
 
 export const FocusReducer = (state: FocusState, action: Action): FocusState => {
   switch (action.type) {
