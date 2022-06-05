@@ -1,6 +1,8 @@
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
+import { toast } from "react-toastify";
+
 // This lets the app load faster on subsequent visits in production, and gives
 // it offline capabilities. However, it also means that developers (and users)
 // will only see deployed updates on subsequent visits to a page, after all the
@@ -62,6 +64,11 @@ function registerValidSW(swUrl: string, config?: Config) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
+      registration.update();
+      setInterval(() => {
+        registration.update();
+        console.debug("Checked for update...");
+      }, (1000 * 60) * 5);
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
@@ -77,6 +84,11 @@ function registerValidSW(swUrl: string, config?: Config) {
                 'New content is available and will be used when all ' +
                   'tabs for this page are closed. See https://cra.link/PWA.'
               );
+              toast.info(`Update available! To update, close all windows and reopen.`, {
+                toastId: "appUpdateAvailable", // Prevent duplicate toasts
+                onClick: () => window.close(), // Closes windows on click
+                autoClose: false // Prevents toast from auto closing
+              });
 
               // Execute callback
               if (config && config.onUpdate) {
