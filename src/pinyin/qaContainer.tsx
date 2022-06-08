@@ -1,38 +1,51 @@
 import React from 'react'
+import { Card } from './card'
+import { CardsBracket } from './cardsBracket'
+import { iArray, oArray, uArray, vArray } from './pinyinArr'
 
 export const QaContainer=()=>{
 
     return (
-        <div>
-            <button ><VoiceIcon/></button>
+        <div className=''>
+            <div className='text-center text-gray-800'>press button to listen</div>
+            <div className='flex justify-center'>
+            <button className='h-16 w-16 bg-pink-300 border rounded-lg'><VoiceIcon/></button>
+            </div>
+
+<div className='flex justify-center my-8'>
+
+            <CardsBracket pys={[vArray[0],oArray[0],iArray[0],uArray[0]].concat()}/>
+</div>
+            <div className='flex justify-center space-x-20'>
+
+            <CancelBtn/>
+            <OkayBtn/>
+            </div>
         </div>
     )
 }
 
-export const VoiceIcon=()=><svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-className="h-6 w-6 stroke-pink-400" viewBox="0 0 853.000000 1280.000000"
-preserveAspectRatio="xMidYMid meet">
+export const OkayBtn=()=>{
 
-<g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
-fill="#000000" stroke="none">
-<path d="M4060 12789 c-194 -22 -402 -81 -577 -164 -472 -224 -789 -626 -894
--1135 l-24 -115 0 -2575 c0 -2452 1 -2579 18 -2665 145 -710 755 -1260 1492
--1345 327 -37 671 21 975 166 473 226 789 629 892 1137 l23 112 0 2575 c0
-2448 -1 2579 -18 2665 -116 576 -556 1066 -1134 1264 -227 78 -508 108 -753
-80z"/>
-<path d="M301 8004 c-158 -42 -262 -156 -292 -319 -7 -38 -9 -312 -6 -839 3
--648 7 -805 21 -921 64 -538 177 -928 391 -1350 184 -361 380 -630 670 -920
-529 -528 1216 -906 2020 -1110 116 -29 231 -56 258 -60 l47 -7 0 -854 0 -854
--657 0 c-717 0 -743 -2 -851 -57 -69 -35 -155 -127 -176 -189 -53 -155 36
--357 203 -463 103 -66 -69 -61 2341 -61 2377 0 2235 -3 2349 54 64 33 144 122
-173 194 19 49 23 75 23 182 0 120 -1 128 -32 192 -36 76 -100 146 -165 179
--95 48 -100 49 -820 49 l-678 0 0 854 c0 805 1 855 18 860 9 2 33 7 52 11 406
-77 934 271 1313 484 1088 609 1778 1567 1971 2736 48 288 51 352 51 1150 l0
-760 -23 58 c-63 155 -190 243 -367 254 -147 10 -260 -32 -350 -129 -32 -34
--63 -80 -76 -115 l-24 -58 -6 -785 c-6 -737 -11 -850 -39 -1050 -100 -705
--417 -1330 -913 -1794 -538 -505 -1229 -810 -2052 -908 -146 -17 -674 -17
--820 0 -663 79 -1253 297 -1735 642 -683 489 -1111 1202 -1230 2050 -28 194
--33 327 -39 1060 l-6 785 -24 58 c-44 111 -161 208 -282 236 -62 15 -175 12
--238 -5z"/>
-</g>
-</svg>
+    return (
+        <button className='bg-sky-500 rounded-lg drop-shadow-lg w-24 h-24 flex justify-center items-center'>
+            <svg xmlns="http://www.w3.org/2000/svg" className='h-20 w-20 fill-yellow-200' viewBox="0 0 24 24"><path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm5.676,8.237-6,5.5a1,1,0,0,1-1.383-.03l-3-3a1,1,0,1,1,1.414-1.414l2.323,2.323,5.294-4.853a1,1,0,1,1,1.352,1.474Z"/></svg>
+        </button>
+    )
+}
+
+export const VoiceIcon=()=>
+    <svg version="1.1" className='fill-sky-500 h-12 w-12' viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+        <g transform='scale(10,10)'>
+        <path d="M66.667 10c-12.885 0-23.334 10.449-23.334 23.333v3.258l-6.406 15.467h-.006A3.338 3.338 0 0 0 40 56.667h3.333v6.666c0 5.521 4.477 10 10 10h8.334V90H90V33.333C90 20.449 79.558 10 66.667 10zm16.666 73.334h-15V66.668h-15A3.34 3.34 0 0 1 50 63.334V50h-5.003L50 37.919v-4.586c0-9.189 7.478-16.667 16.667-16.667 9.192 0 16.666 7.478 16.666 16.667v50.001zM31.81 54.324l-6.158-2.553c-3.093 7.455-3.093 15.671-.014 23.132l6.166-2.546c-2.409-5.82-2.403-12.219.006-18.033zM19.492 49.218l-6.159-2.552c-4.27 10.295-4.609 22.222-.013 33.335l6.159-2.552c-3.763-9.101-3.763-19.128.013-28.231z"/>
+        </g>
+        </svg>
+
+export const CancelBtn=()=>{
+return(
+    <button className='bg-stone-400 rounded-lg drop-shadow-lg w-24 h-24 flex justify-center items-center'>
+        <svg xmlns="http://www.w3.org/2000/svg" className='h-20 w-20 fill-yellow-200' viewBox="0 0 24 24"><g data-name="5.Cancel"><path d="M12 24a12 12 0 1 1 12-12 12.013 12.013 0 0 1-12 12zm0-22a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2z"/><path d="m7.292 8.707 1.415-1.414 8 8-1.414 1.414z"/><path d="m7.292 15.293 8-8 1.415 1.414-8 8z"/></g></svg>
+    </button>
+    )
+}
+   
