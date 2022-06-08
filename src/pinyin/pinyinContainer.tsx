@@ -4,7 +4,10 @@ import useSound from "use-sound";
 import { initPinyinState, PinyinContext } from "../operations/PinyinContext";
 import { PinyinReducer } from "../operations/PinyinReducer";
 import { Card } from "./card";
+import { CardsBracket } from "./cardsBracket";
 import { Header } from "./header";
+import { aArray, eArray, oArray } from "./pinyinArr";
+import { QaContainer } from "./qaContainer";
 
 export const PinyinContainer=()=>{
     const [play]=useSound('assets/sounds/effects.mp3',{sprite:{
@@ -19,7 +22,7 @@ export const PinyinContainer=()=>{
         <PinyinContext.Provider value={{state,dispatch}}>
         <div className="container mx-auto h-full w-full lg:w-[500px] flex flex-col justify-between">
             <Header/>
-            <Card/>
+            <QaContainer/>
             <ReactModal className=" absolute top-[50%] left-[50%] border-2 -translate-x-1/2 -translate-y-3/4" shouldCloseOnOverlayClick={false} isOpen={false}>
                 modal
             </ReactModal>
