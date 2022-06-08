@@ -6,7 +6,7 @@ import { iArray, oArray, uArray, vArray } from './pinyinArr'
 export const QaContainer=()=>{
 
     return (
-        <div className=''>
+        <div className='w-full h-[70%]'>
             <div className='text-center text-gray-800'>press button to listen</div>
             <div className='flex justify-center'>
             <button className='h-16 w-16 bg-pink-300 border rounded-lg'><VoiceIcon/></button>
