@@ -1,0 +1,46 @@
+"filename", "language", "TypeScript", "TypeScript React", "CSS", "comment", "blank", "total"
+"/Users/chenhuanqin/Projects/edugame/src/App.css", "CSS", 0, 0, 33, 0, 6, 39
+"/Users/chenhuanqin/Projects/edugame/src/App.test.tsx", "TypeScript React", 0, 8, 0, 0, 2, 10
+"/Users/chenhuanqin/Projects/edugame/src/App.tsx", "TypeScript React", 0, 21, 0, 0, 6, 27
+"/Users/chenhuanqin/Projects/edugame/src/calculates/Ratings.tsx", "TypeScript React", 0, 33, 0, 0, 9, 42
+"/Users/chenhuanqin/Projects/edugame/src/calculates/calculatorContainer.tsx", "TypeScript React", 0, 30, 0, 0, 5, 35
+"/Users/chenhuanqin/Projects/edugame/src/calculates/infos.tsx", "TypeScript React", 0, 28, 0, 1, 3, 32
+"/Users/chenhuanqin/Projects/edugame/src/calculates/keyboard.tsx", "TypeScript React", 0, 208, 0, 0, 39, 247
+"/Users/chenhuanqin/Projects/edugame/src/calculates/screen.tsx", "TypeScript React", 0, 62, 0, 0, 6, 68
+"/Users/chenhuanqin/Projects/edugame/src/calculates/timer.tsx", "TypeScript React", 0, 43, 0, 1, 3, 47
+"/Users/chenhuanqin/Projects/edugame/src/focus/block.tsx", "TypeScript React", 0, 96, 0, 0, 11, 107
+"/Users/chenhuanqin/Projects/edugame/src/focus/bracket.tsx", "TypeScript React", 0, 33, 0, 0, 6, 39
+"/Users/chenhuanqin/Projects/edugame/src/focus/controller.tsx", "TypeScript React", 0, 32, 0, 3, 3, 38
+"/Users/chenhuanqin/Projects/edugame/src/focus/dimensionSelector.tsx", "TypeScript React", 0, 34, 0, 0, 2, 36
+"/Users/chenhuanqin/Projects/edugame/src/focus/focus.tsx", "TypeScript React", 0, 26, 0, 0, 2, 28
+"/Users/chenhuanqin/Projects/edugame/src/focus/gamebox.tsx", "TypeScript React", 0, 22, 0, 0, 2, 24
+"/Users/chenhuanqin/Projects/edugame/src/focus/infoBar.tsx", "TypeScript React", 0, 13, 0, 0, 2, 15
+"/Users/chenhuanqin/Projects/edugame/src/focus/records.tsx", "TypeScript React", 0, 28, 0, 1, 4, 33
+"/Users/chenhuanqin/Projects/edugame/src/focus/roundTimeSelector.tsx", "TypeScript React", 0, 18, 0, 0, 1, 19
+"/Users/chenhuanqin/Projects/edugame/src/focus/timeDisplay.tsx", "TypeScript React", 0, 66, 0, 3, 7, 76
+"/Users/chenhuanqin/Projects/edugame/src/focus/title.tsx", "TypeScript React", 0, 12, 0, 0, 2, 14
+"/Users/chenhuanqin/Projects/edugame/src/index.css", "CSS", 0, 0, 18, 0, 2, 20
+"/Users/chenhuanqin/Projects/edugame/src/index.tsx", "TypeScript React", 0, 19, 0, 7, 3, 29
+"/Users/chenhuanqin/Projects/edugame/src/operations/CalculatorContext.ts", "TypeScript", 26, 0, 0, 0, 5, 31
+"/Users/chenhuanqin/Projects/edugame/src/operations/CalculatorReducer.ts", "TypeScript", 138, 0, 0, 0, 6, 144
+"/Users/chenhuanqin/Projects/edugame/src/operations/FocusContext.ts", "TypeScript", 9, 0, 0, 0, 3, 12
+"/Users/chenhuanqin/Projects/edugame/src/operations/FocusReducer.ts", "TypeScript", 51, 0, 0, 0, 2, 53
+"/Users/chenhuanqin/Projects/edugame/src/operations/PinyinContext.ts", "TypeScript", 11, 0, 0, 0, 5, 16
+"/Users/chenhuanqin/Projects/edugame/src/operations/PinyinReducer.ts", "TypeScript", 18, 0, 0, 0, 6, 24
+"/Users/chenhuanqin/Projects/edugame/src/pinyin/card.tsx", "TypeScript React", 0, 8, 0, 0, 2, 10
+"/Users/chenhuanqin/Projects/edugame/src/pinyin/cardsBracket.tsx", "TypeScript React", 0, 10, 0, 0, 2, 12
+"/Users/chenhuanqin/Projects/edugame/src/pinyin/header.tsx", "TypeScript React", 0, 8, 0, 0, 2, 10
+"/Users/chenhuanqin/Projects/edugame/src/pinyin/pinyinArr.ts", "TypeScript", 6, 0, 0, 0, 7, 13
+"/Users/chenhuanqin/Projects/edugame/src/pinyin/pinyinContainer.tsx", "TypeScript React", 0, 31, 0, 3, 1, 35
+"/Users/chenhuanqin/Projects/edugame/src/pinyin/pinyinNav.tsx", "TypeScript React", 0, 13, 0, 0, 4, 17
+"/Users/chenhuanqin/Projects/edugame/src/pinyin/pyFunc.ts", "TypeScript", 7, 0, 0, 0, 4, 11
+"/Users/chenhuanqin/Projects/edugame/src/pinyin/pyInterface.ts", "TypeScript", 14, 0, 0, 0, 0, 14
+"/Users/chenhuanqin/Projects/edugame/src/pinyin/qaContainer.tsx", "TypeScript React", 0, 41, 0, 0, 8, 49
+"/Users/chenhuanqin/Projects/edugame/src/portal.tsx", "TypeScript React", 0, 43, 0, 0, 9, 52
+"/Users/chenhuanqin/Projects/edugame/src/react-app-env.d.ts", "TypeScript", 0, 0, 0, 1, 1, 2
+"/Users/chenhuanqin/Projects/edugame/src/reportWebVitals.ts", "TypeScript", 13, 0, 0, 0, 3, 16
+"/Users/chenhuanqin/Projects/edugame/src/service-worker.ts", "TypeScript", 47, 0, 0, 34, 12, 93
+"/Users/chenhuanqin/Projects/edugame/src/serviceWorkerRegistration.ts", "TypeScript", 104, 0, 0, 31, 16, 151
+"/Users/chenhuanqin/Projects/edugame/src/setupTests.ts", "TypeScript", 1, 0, 0, 4, 1, 6
+"/Users/chenhuanqin/Projects/edugame/src/swDev.ts", "TypeScript", 8, 0, 0, 0, 1, 9
+"Total", "-", 453, 986, 51, 89, 226, 1805

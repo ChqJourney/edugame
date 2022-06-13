@@ -1,0 +1,74 @@
+Date : 2022-06-12 22:14:05
+Directory : /Users/chenhuanqin/Projects/edugame/src
+Total : 44 files,  1490 codes, 89 comments, 226 blanks, all 1805 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| TypeScript React |         27 |        986 |         19 |        146 |      1,151 |
+| TypeScript       |         15 |        453 |         70 |         72 |        595 |
+| CSS              |          2 |         51 |          0 |          8 |         59 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                       | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                          |         44 |      1,490 |         89 |        226 |      1,805 |
+| calculates                                                                 |          6 |        404 |          2 |         65 |        471 |
+| focus                                                                      |         11 |        380 |          7 |         42 |        429 |
+| operations                                                                 |          6 |        253 |          0 |         27 |        280 |
+| pinyin                                                                     |          9 |        138 |          3 |         30 |        171 |
++----------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                   | language         | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| /Users/chenhuanqin/Projects/edugame/src/App.css                            | CSS              |         33 |          0 |          6 |         39 |
+| /Users/chenhuanqin/Projects/edugame/src/App.test.tsx                       | TypeScript React |          8 |          0 |          2 |         10 |
+| /Users/chenhuanqin/Projects/edugame/src/App.tsx                            | TypeScript React |         21 |          0 |          6 |         27 |
+| /Users/chenhuanqin/Projects/edugame/src/calculates/Ratings.tsx             | TypeScript React |         33 |          0 |          9 |         42 |
+| /Users/chenhuanqin/Projects/edugame/src/calculates/calculatorContainer.tsx | TypeScript React |         30 |          0 |          5 |         35 |
+| /Users/chenhuanqin/Projects/edugame/src/calculates/infos.tsx               | TypeScript React |         28 |          1 |          3 |         32 |
+| /Users/chenhuanqin/Projects/edugame/src/calculates/keyboard.tsx            | TypeScript React |        208 |          0 |         39 |        247 |
+| /Users/chenhuanqin/Projects/edugame/src/calculates/screen.tsx              | TypeScript React |         62 |          0 |          6 |         68 |
+| /Users/chenhuanqin/Projects/edugame/src/calculates/timer.tsx               | TypeScript React |         43 |          1 |          3 |         47 |
+| /Users/chenhuanqin/Projects/edugame/src/focus/block.tsx                    | TypeScript React |         96 |          0 |         11 |        107 |
+| /Users/chenhuanqin/Projects/edugame/src/focus/bracket.tsx                  | TypeScript React |         33 |          0 |          6 |         39 |
+| /Users/chenhuanqin/Projects/edugame/src/focus/controller.tsx               | TypeScript React |         32 |          3 |          3 |         38 |
+| /Users/chenhuanqin/Projects/edugame/src/focus/dimensionSelector.tsx        | TypeScript React |         34 |          0 |          2 |         36 |
+| /Users/chenhuanqin/Projects/edugame/src/focus/focus.tsx                    | TypeScript React |         26 |          0 |          2 |         28 |
+| /Users/chenhuanqin/Projects/edugame/src/focus/gamebox.tsx                  | TypeScript React |         22 |          0 |          2 |         24 |
+| /Users/chenhuanqin/Projects/edugame/src/focus/infoBar.tsx                  | TypeScript React |         13 |          0 |          2 |         15 |
+| /Users/chenhuanqin/Projects/edugame/src/focus/records.tsx                  | TypeScript React |         28 |          1 |          4 |         33 |
+| /Users/chenhuanqin/Projects/edugame/src/focus/roundTimeSelector.tsx        | TypeScript React |         18 |          0 |          1 |         19 |
+| /Users/chenhuanqin/Projects/edugame/src/focus/timeDisplay.tsx              | TypeScript React |         66 |          3 |          7 |         76 |
+| /Users/chenhuanqin/Projects/edugame/src/focus/title.tsx                    | TypeScript React |         12 |          0 |          2 |         14 |
+| /Users/chenhuanqin/Projects/edugame/src/index.css                          | CSS              |         18 |          0 |          2 |         20 |
+| /Users/chenhuanqin/Projects/edugame/src/index.tsx                          | TypeScript React |         19 |          7 |          3 |         29 |
+| /Users/chenhuanqin/Projects/edugame/src/operations/CalculatorContext.ts    | TypeScript       |         26 |          0 |          5 |         31 |
+| /Users/chenhuanqin/Projects/edugame/src/operations/CalculatorReducer.ts    | TypeScript       |        138 |          0 |          6 |        144 |
+| /Users/chenhuanqin/Projects/edugame/src/operations/FocusContext.ts         | TypeScript       |          9 |          0 |          3 |         12 |
+| /Users/chenhuanqin/Projects/edugame/src/operations/FocusReducer.ts         | TypeScript       |         51 |          0 |          2 |         53 |
+| /Users/chenhuanqin/Projects/edugame/src/operations/PinyinContext.ts        | TypeScript       |         11 |          0 |          5 |         16 |
+| /Users/chenhuanqin/Projects/edugame/src/operations/PinyinReducer.ts        | TypeScript       |         18 |          0 |          6 |         24 |
+| /Users/chenhuanqin/Projects/edugame/src/pinyin/card.tsx                    | TypeScript React |          8 |          0 |          2 |         10 |
+| /Users/chenhuanqin/Projects/edugame/src/pinyin/cardsBracket.tsx            | TypeScript React |         10 |          0 |          2 |         12 |
+| /Users/chenhuanqin/Projects/edugame/src/pinyin/header.tsx                  | TypeScript React |          8 |          0 |          2 |         10 |
+| /Users/chenhuanqin/Projects/edugame/src/pinyin/pinyinArr.ts                | TypeScript       |          6 |          0 |          7 |         13 |
+| /Users/chenhuanqin/Projects/edugame/src/pinyin/pinyinContainer.tsx         | TypeScript React |         31 |          3 |          1 |         35 |
+| /Users/chenhuanqin/Projects/edugame/src/pinyin/pinyinNav.tsx               | TypeScript React |         13 |          0 |          4 |         17 |
+| /Users/chenhuanqin/Projects/edugame/src/pinyin/pyFunc.ts                   | TypeScript       |          7 |          0 |          4 |         11 |
+| /Users/chenhuanqin/Projects/edugame/src/pinyin/pyInterface.ts              | TypeScript       |         14 |          0 |          0 |         14 |
+| /Users/chenhuanqin/Projects/edugame/src/pinyin/qaContainer.tsx             | TypeScript React |         41 |          0 |          8 |         49 |
+| /Users/chenhuanqin/Projects/edugame/src/portal.tsx                         | TypeScript React |         43 |          0 |          9 |         52 |
+| /Users/chenhuanqin/Projects/edugame/src/react-app-env.d.ts                 | TypeScript       |          0 |          1 |          1 |          2 |
+| /Users/chenhuanqin/Projects/edugame/src/reportWebVitals.ts                 | TypeScript       |         13 |          0 |          3 |         16 |
+| /Users/chenhuanqin/Projects/edugame/src/service-worker.ts                  | TypeScript       |         47 |         34 |         12 |         93 |
+| /Users/chenhuanqin/Projects/edugame/src/serviceWorkerRegistration.ts       | TypeScript       |        104 |         31 |         16 |        151 |
+| /Users/chenhuanqin/Projects/edugame/src/setupTests.ts                      | TypeScript       |          1 |          4 |          1 |          6 |
+| /Users/chenhuanqin/Projects/edugame/src/swDev.ts                           | TypeScript       |          8 |          0 |          1 |          9 |
+| Total                                                                      |                  |      1,490 |         89 |        226 |      1,805 |
++----------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

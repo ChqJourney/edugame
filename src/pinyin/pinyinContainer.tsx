@@ -11,19 +11,20 @@ import { PinyinNav } from "./pinyinNav";
 import { QaContainer } from "./qaContainer";
 
 export const PinyinContainer=()=>{
-    const [play]=useSound('assets/sounds/effects.mp3',{sprite:{
-        'success':[316,2100],
-        'wrong':[2824,1700],
-        'correct':[6334,1200],
-        'timeout':[7686,2100],
-        'start':[10106,2050]
+    const [play]=useSound('assets/sounds/py.mp3',{sprite:{
+        'a':[480,650],
+        'o':[1633,720],
+        'e':[2750,690],
+        'i':[3470,720],
+        'u':[4250,700],
+        'v':[5030,1000]
     }})
     const [state, dispatch] = useReducer(PinyinReducer, initPinyinState);
     return (
         <PinyinContext.Provider value={{state,dispatch}}>
-        <div className="container mx-auto h-screen w-full lg:w-[500px] flex flex-col justify-between">
+        <div className="container mx-auto h-screen w-full lg:w-[500px] flex flex-col justify-between bg-slate-300">
             <Header/>
-            <QaContainer/>
+            <QaContainer sound={({id}:{id:string})=>play({id})}/>
             <PinyinNav/>
             {/* <ReactModal className=" absolute top-[50%] left-[50%] border-2 -translate-x-1/2 -translate-y-3/4" shouldCloseOnOverlayClick={false} isOpen={false}>
                 modal
