@@ -11,7 +11,7 @@ export const uArray="uūúǔù";
 
 export const vArray="üǖǘǚǜ";
 
-export const pySMArray=["a","o","e","i","u","ü","b","p","m","f","d","t","n","l","g","k","h","j","q","x","z","c","s","r","zh","ch","sh"];
+export const pySMArray=["b","p","m","f","d","t","n","l","g","k","h","j","q","x","z","c","s","r","zh","ch","sh","y","w"];
 
-export const pyYMArray=["an","en","un","in","ang","ing","eng","ai","ei","ui","ue"]
+export const pyYMArray=["a","o","e","i","u","ü","ai","ei","ui","ao","ou","iu","ie","üe","er","an","en","in","un","ün","ang","eng","ing","ong"];
   
