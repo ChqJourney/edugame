@@ -12,6 +12,7 @@ export const PinyinReducer = (
     case "fn_setStatus":
       return {
         ...state,
+        status:action.status,
       }
     
     default:

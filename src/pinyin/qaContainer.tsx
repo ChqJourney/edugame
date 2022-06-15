@@ -1,33 +1,35 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card } from './card'
 import { CardsBracket } from './cardsBracket'
-import { iArray, oArray, uArray, vArray } from './pinyinArr'
+import { iArray, oArray, pySMArray, pyYMArray, uArray, vArray } from './pinyinArr'
 import { PyTi } from './pyInterface'
 
 export const QaContainer = ({sound}:{sound:({id}:{id:string})=>void}) => {
-
+    const [tis,setTi]=useState<PyTi[]>([])
 
     useEffect(()=>{
-        let d:PyTi[]
         fetch('assets/qs/tis.json').then(res=>res.json()).then(data=>{
-            d=data
-            console.log(d)
+            setTi(data)
         }) 
     },[])
     return (
         <div className='w-full h-[70%] flex flex-col justify-between'>
-            <div className='text-center text-gray-800'>press button to listen</div>
+            {
+                tis.length!==0&&
+                (<><div className='text-center text-gray-800'>{tis[0].tiDescription}</div>
             <div className='flex justify-center'>
-                <button className='h-16 w-16 bg-pink-300 border rounded-lg' onClick={()=>sound({id:'a'})}><VoiceIcon /></button>
+                <button className='h-16 w-16 bg-pink-300 border rounded-lg' onClick={()=>sound({id:tis[0].soundId})}><VoiceIcon /></button>
             </div>
             <div className='flex justify-center my-8'>
-                <CardsBracket pys={[vArray[0], oArray[0], iArray[0], uArray[0]].concat()} />
+                <CardsBracket pys={[tis[0].choices[0].answerDescription,tis[0].choices[1].answerDescription,tis[0].choices[2].answerDescription,tis[0].choices[3].answerDescription]} />
             </div>
             <div className='flex justify-center space-x-20'>
 
                 <CancelBtn />
                 <OkayBtn />
-            </div>
+            </div></>)
+            }
+            
         </div>
     )
 }

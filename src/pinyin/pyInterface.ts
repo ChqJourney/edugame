@@ -8,9 +8,9 @@ export interface PyTi{
     tiDescription:string
     tiImgPath:string
     soundId:string
-    choices:[]
+    choices:Choice[]
     answerIndex:number
-    
+
 }
 export interface Choice{
     answerDescription:string

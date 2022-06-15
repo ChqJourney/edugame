@@ -1,13 +1,13 @@
 [
     {
         "id":0,
-        "tiDescription":"",
-        "sound":"a",
-        "choice":[
-            {"answerDescription":"a"},
-            {"answerDescription":"a"},
-            {"answerDescription":"a"},
-            {"answerDescription":"a"}
+        "tiDescription":"press button to listen",
+        "soundId":"a",
+        "choices":[
+            {"answerDescription":"[v]"},
+            {"answerDescription":"[a]"},
+            {"answerDescription":"[ang]"},
+            {"answerDescription":"[eng"}
         ],
         "answerIndex":1
     }
