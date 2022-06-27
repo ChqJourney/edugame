@@ -3,7 +3,7 @@ import React from "react";
 export const PinyinNav = () => {
 
     return (
-        <div className="h-[10%] bg-pink-600 flex justify-between items-center px-4">{
+        <div className="h-[10%] bg-gradient-to-r from-indigo-500 flex justify-between items-center px-4">{
             ["声母","韵母","混合"].map((v,i)=><NavBlock txt={v} key={i}/>)
         }</div>
     )

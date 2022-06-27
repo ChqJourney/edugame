@@ -22,7 +22,7 @@ export const PinyinContainer=()=>{
     const [state, dispatch] = useReducer(PinyinReducer, initPinyinState);
     return (
         <PinyinContext.Provider value={{state,dispatch}}>
-        <div className="container mx-auto h-screen w-full lg:w-[500px] flex flex-col justify-between bg-slate-300">
+        <div className="container mx-auto h-screen w-full lg:w-[500px] bg-gradient-to-b from-cyan-300 to-blue-300 flex flex-col justify-between">
             <Header/>
             <QaContainer sound={({id}:{id:string})=>play({id})}/>
             <PinyinNav/>
