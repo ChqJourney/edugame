@@ -1,12 +1,13 @@
 import React from 'react'
 import { Card } from './card'
 import { aArray } from './pinyinArr'
+import { Choice } from './pyInterface'
 
-export const CardsBracket=({pys}:{pys:string[]})=>{
+export const CardsBracket=({pys}:{pys:Choice[]})=>{
 
     return (
         <div className="flex space-x-6">
-            {pys.map((v,i)=><Card py={v} key={i}/>)}
+            {pys.map((v,i)=><Card py={v.answerDescription} idx={i} key={i}/>)}
         </div>
     )
 }

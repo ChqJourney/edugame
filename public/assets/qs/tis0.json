@@ -1,0 +1,122 @@
+[
+    {
+        "id":0,
+        "tiDescription":"press button to listen",
+        "soundId":"a",
+        "choices":[
+            {"answerDescription":"[v]"},
+            {"answerDescription":"[a]"},
+            {"answerDescription":"[ang]"},
+            {"answerDescription":"[eng]"}
+        ],
+        "answerIndex":1
+    },
+    {
+        "id":1,
+        "tiDescription":"press button to listen",
+        "soundId":"o",
+        "choices":[
+            {"answerDescription":"[o]"},
+            {"answerDescription":"[a]"},
+            {"answerDescription":"[in]"},
+            {"answerDescription":"[en]"}
+        ],
+        "answerIndex":1
+    },
+    {
+        "id":2,
+        "tiDescription":"press button to listen",
+        "soundId":"e",
+        "choices":[
+            {"answerDescription":"[v]"},
+            {"answerDescription":"[a]"},
+            {"answerDescription":"[e]"},
+            {"answerDescription":"[i]"}
+        ],
+        "answerIndex":1
+    },
+    {
+        "id":3,
+        "tiDescription":"press button to listen",
+        "soundId":"i",
+        "choices":[
+            {"answerDescription":"[v]"},
+            {"answerDescription":"[a]"},
+            {"answerDescription":"[i]"},
+            {"answerDescription":"[e]"}
+        ],
+        "answerIndex":1
+    },
+    {
+        "id":4,
+        "tiDescription":"press button to listen",
+        "soundId":"u",
+        "choices":[
+            {"answerDescription":"[u]"},
+            {"answerDescription":"[a]"},
+            {"answerDescription":"[i]"},
+            {"answerDescription":"[v]"}
+        ],
+        "answerIndex":1
+    },
+    {
+        "id":5,
+        "tiDescription":"press button to listen",
+        "soundId":"v",
+        "choices":[
+            {"answerDescription":"[v]"},
+            {"answerDescription":"[u]"},
+            {"answerDescription":"[a]"},
+            {"answerDescription":"[o]"}
+        ],
+        "answerIndex":1
+    },
+    {
+        "id":6,
+        "tiDescription":"press button to listen",
+        "soundId":"a",
+        "choices":[
+            {"answerDescription":"[a]"},
+            {"answerDescription":"[u]"},
+            {"answerDescription":"[zh]"},
+            {"answerDescription":"[in]"}
+        ],
+        "answerIndex":1
+    },
+    {
+        "id":7,
+        "tiDescription":"press button to listen",
+        "soundId":"u",
+        "choices":[
+            {"answerDescription":"[u]"},
+            {"answerDescription":"[e]"},
+            {"answerDescription":"[r]"},
+            {"answerDescription":"[s]"}
+        ],
+        "answerIndex":1
+    },
+    {
+        "id":8,
+        "tiDescription":"press button to listen",
+        "soundId":"a",
+        "choices":[
+            {"answerDescription":"[v]"},
+            {"answerDescription":"[n]"},
+            {"answerDescription":"[a]"},
+            {"answerDescription":"[m]"}
+        ],
+        "answerIndex":1
+    },
+    {
+        "id":9,
+        "tiDescription":"press button to listen",
+        "soundId":"i",
+        "choices":[
+            {"answerDescription":"[u]"},
+            {"answerDescription":"[e]"},
+            {"answerDescription":"[v]"},
+            {"answerDescription":"[ui]"}
+        ],
+        "answerIndex":1
+    }
+]

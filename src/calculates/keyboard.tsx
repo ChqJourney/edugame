@@ -202,7 +202,6 @@ const ConfirmModal=({sounder}:{sounder:({id}:{id:string})=>void})=>{
     const startAct=()=>{
         var tis = createRandomTis({ quantity: state.total, mode: state.calType })
         setTimeout(()=>{
-
             dispatch({ type: 'fn_createQs', tis: tis })
             dispatch({ type: 'set_game_status',status:"running" })
         },2300)

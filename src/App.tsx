@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { CalculatorContainer } from './calculates/calculatorContainer';
 import { Focus } from './focus/focus';
-import { PinyinContainer } from './pinyin/pinyinContainer';
+import { Pinyin } from './pinyin/pinyin';
 import { Portal } from './portal';
 
 ReactModal.setAppElement("#root")
@@ -17,7 +17,7 @@ function App() {
         <Route path='/' element={<Portal/>}/>
         <Route path="/focus" element={<Focus/>}/>
         <Route path="/calculator" element={<CalculatorContainer/>}/>
-        <Route path='/pinyin' element={<PinyinContainer/>}/>
+        <Route path='/pinyin' element={<Pinyin/>}/>
       </Routes>
     </div>
   );

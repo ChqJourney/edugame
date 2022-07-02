@@ -1,4 +1,5 @@
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
+import { useNavigate } from 'react-router-dom';
 import useSound from 'use-sound';
 import { FocusContext } from '../operations/FocusContext'
 import { FocusReducer, FocusState } from '../operations/FocusReducer';
@@ -6,7 +7,7 @@ import { createRandomArray } from './bracket';
 import { GameBox } from './gamebox'
 
 export const Focus = () => {
-
+const navigate=useNavigate()
   const initState: FocusState =
   {
     userName:localStorage.getItem('user')??"Hi friend~",
@@ -19,6 +20,13 @@ export const Focus = () => {
     recordLevel: "3 x 3", 
     records: [], 
   };
+  function blur() {
+    navigate('/')
+}
+useEffect(() => {
+    window.addEventListener('blur',blur)
+    return () => window.removeEventListener('blur',blur)
+},[])
   const [state, dispatch] = useReducer(FocusReducer, initState);
   return (
     <FocusContext.Provider value={{ state, dispatch }}>

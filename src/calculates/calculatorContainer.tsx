@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { CalculatorContext, initCalculatorState } from "../operations/CalculatorContext";
 import { CalculatorReducer } from "../operations/CalculatorReducer";
 import { Infos } from "./infos";
@@ -6,8 +6,10 @@ import { Keyboard } from "./keyboard";
 import { Screen } from "./screen";
 import Modal from 'react-modal';
 import useSound from "use-sound";
+import { useNavigate } from "react-router-dom";
 
 export const CalculatorContainer=()=>{
+    const navigate=useNavigate()
     const [play]=useSound('assets/sounds/effects.mp3',{sprite:{
         'success':[316,2100],
         'wrong':[2824,1700],
@@ -16,6 +18,13 @@ export const CalculatorContainer=()=>{
         'start':[10106,2050]
     }})
     const [state, dispatch] = useReducer(CalculatorReducer, initCalculatorState);
+    function blur() {
+        navigate('/')
+    }
+    useEffect(() => {
+        window.addEventListener('blur',blur)
+        return () => window.removeEventListener('blur',blur)
+    },[])
     return (
         <CalculatorContext.Provider value={{state,dispatch}}>
 

@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
+import { PinyinContext } from "../operations/PinyinContext";
+import { createPyTis } from "./pyFunc";
+import { PyTi } from "./pyInterface";
 
 export const PinyinNav = () => {
 
@@ -10,8 +13,11 @@ export const PinyinNav = () => {
 }
 
 export const NavBlock = ({ txt }: { txt: string }) => {
-
+    const { dispatch } = useContext(PinyinContext);
+    function handleClick() {
+        dispatch({type:"fn_switchModal",modal:{showMsg:true,msg:txt}})
+    }
     return (
-        <button className="text-gray-200 font-bold font-serif text-2xl drop-shadow-lg">{txt}</button>
+        <button onClick={handleClick} className="text-gray-200 font-bold font-serif text-2xl drop-shadow-lg">{txt}</button>
     )
 }
