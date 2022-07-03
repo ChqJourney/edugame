@@ -6,8 +6,9 @@ export type PinyinAction =
   | { type: "fn_initTis"; tis: PyTi[] }
   | { type: "fn_setCurrentTi"; currentTiIdx: number }
   | { type: "fn_recordUserAnswer"; userAnswerIdx: number }
-  | { type: "fn_switchModal"; modal: {showMsg:boolean,msg?:string} }
-  | { type: "fn_setMode"; mode: string };
+  | { type: "fn_switchModal"; modal: { showMsg: boolean; msg?: string } }
+  | { type: "fn_setMode"; mode: string }
+  | { type: "fn_reset" };
 
 export const PinyinReducer = (
   state: PinyinState,
@@ -15,9 +16,14 @@ export const PinyinReducer = (
 ): PinyinState => {
   switch (action.type) {
     case "fn_switchModal":
-      return { ...state, modal: {showMsg:action.modal.showMsg,msg:action.modal.msg} };
-      case "fn_initTis":
+      return {
+        ...state,
+        modal: { showMsg: action.modal.showMsg, msg: action.modal.msg },
+      };
+    case "fn_initTis":
       return { ...state, tis: action.tis };
+    case "fn_reset":
+      return { ...state, tis: [], currentIdx: 0, status: "idle" };
     case "fn_setMode":
       return { ...state, mode: action.mode };
     case "fn_setStatus":

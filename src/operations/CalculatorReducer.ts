@@ -56,11 +56,12 @@ export const CalculatorReducer = (
         const newIdx = idx === level.length - 1 ? 0 : idx + 1;
         const newCalType = idx === level.length - 1 ? level[0] : level[idx + 1];
         const newRoundTime = (roundTimeArr[newIdx] * state.total) / 10;
+        var res=localStorage.getItem("records-calculator")
         return {
           ...state,
           calType: newCalType,
           roundTime: newRoundTime,
-          infos:JSON.parse(localStorage.getItem("records-calculator")??"")[`${newCalType}${state.total}`]
+          infos:res?JSON.parse(res)[`${newCalType}${state.total}`]:[]
         };
 
       } else {

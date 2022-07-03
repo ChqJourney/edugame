@@ -3,36 +3,42 @@ import { PinyinContext } from '../operations/PinyinContext'
 import { CardsBracket } from './cardsBracket'
 import { Judge } from './judge'
 
-export const QaContainer = ({ sound }: { sound: ({ id }: { id: string }) => void }) => {
+export const QaContainer = ({ sound,pySound }: { sound: ({ id }: { id: string }) => void,pySound: ({ id }: { id: string }) => void }) => {
     const { state, dispatch } = useContext(PinyinContext)
-    const [showJudge,setShowJudge]=useState(false)
+    const [showJudge, setShowJudge] = useState(false)
     function confirmSelection() {
         setTimeout(() => {
-            dispatch({ type: 'fn_setCurrentTi', currentTiIdx: state.currentIdx + 1 })
+            dispatch({ type: 'fn_setCurrentTi', currentTiIdx: state.currentIdx!==9?state.currentIdx + 1:state.currentIdx })
         }, 2000);
-        setTimeout(() => {setShowJudge(false)}, 1500);
+        setTimeout(() => { setShowJudge(false) }, 1500);
         setShowJudge(true)
+        if(state.tis.every(ti=>ti.userAnswerIndex===ti.answerIndex)){
+            dispatch({type:'fn_setStatus','status':'success'})
+        }
     }
-    
+// TODO:实现Error indicator
+// TODO:点击“下一题”后，音频播放按钮要保持失效，直至新题加载完毕
+// TODO:题库完整 
     return (
-        <div className='w-full h-[70%] flex flex-col justify-between'>
+        <div className='w-full h-[70%] flex flex-col justify-between relative'>
             {
-                state.tis.length !== 0 &&
-                (<>
-                    <div className=' justify-center'>
-                        <div className='text-center text-gray-800 h-8'>{state.tis[state.currentIdx].tiDescription}</div>
-                        <div className='flex justify-center'>
-                            <button className='h-24 w-24 bg-pink-300 border rounded-lg flex justify-center items-center' onClick={() => sound({ id: state.tis[state.currentIdx].soundId })}><VoiceIcon /></button>
+                state.tis.length !== 0 ?
+                    (<>
+                        <div className=' justify-center'>
+                            <div className='text-center text-gray-800 h-8 mt-4'>{state.tis[state.currentIdx].tiDescription}</div>
+                            <div className='flex justify-center'>
+                                <button className='h-24 w-24 bg-pink-300 border rounded-lg flex justify-center items-center' onClick={() => pySound({ id: state.tis[state.currentIdx].soundId })}><VoiceIcon /></button>
+                            </div>
                         </div>
-                    </div>
-                    <div className='flex space-x-2 justify-center'>
-                        <CardsBracket pys={state.tis[state.currentIdx].choices} />
-                    </div>
-                    <Judge show={showJudge}/>
-                    <div className='flex justify-center'>
-                        <button onClick={confirmSelection} className='h-12 w-48 bg-sky-400 rounded-lg drop-shadow-md flex justify-center items-center'>下一题</button>
-                    </div>
-                    {/* <div className='flex justify-center space-x-20'>
+                        <div className='flex space-x-2 justify-center'>
+                        <div className='absolute right-6 top-0 text-xl text-lime-600'>{state.currentIdx+1} / {state.tiQuantity}</div>
+                            <CardsBracket pys={state.tis[state.currentIdx].choices} />
+                        </div>
+                        <Judge show={showJudge} sounder={sound}/>
+                        <div className='flex justify-center'>
+                            <button onClick={confirmSelection} className='h-12 w-48 bg-sky-400 rounded-lg drop-shadow-md flex justify-center items-center'>下一题</button>
+                        </div>
+                        {/* <div className='flex justify-center space-x-20'>
                         <button onClick={confirmSelection} className='bg-sky-500 rounded-lg drop-shadow-md w-20 h-16 flex justify-center items-center'>
                             <svg xmlns="http://www.w3.org/2000/svg" className='h-12 w-12 fill-pink-500' viewBox="0 0 24 24"><g data-name="5.Cancel"><path d="M12 24a12 12 0 1 1 12-12 12.013 12.013 0 0 1-12 12zm0-22a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2z" /><path d="m7.292 8.707 1.415-1.414 8 8-1.414 1.414z" /><path d="m7.292 15.293 8-8 1.415 1.414-8 8z" /></g></svg>
                         </button>
@@ -41,7 +47,14 @@ export const QaContainer = ({ sound }: { sound: ({ id }: { id: string }) => void
                         </button>
 
                     </div> */}
-                </>)
+                    </>) : (
+                        <>
+                        <div className='text-center text-3xl my-16 text-sky-600'>点击</div>
+                            <div className='flex justify-center absolute bottom-8 left-[50%] -translate-x-[50%] stroke-emerald-400'>
+                            <svg className='w-36 h-64' viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7396" width="200" height="200"><path d="M448 512V0h128v512h192l-256 256-256-256h192z m576 512H0v-128h1024v128z" fill="#1296db" p-id="7397"></path></svg>
+                            </div>
+                            </>
+                    )
             }
 
         </div>
