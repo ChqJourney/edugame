@@ -1,6 +1,5 @@
 import React from 'react'
 import { Card } from './card'
-import { aArray } from './pinyinArr'
 import { Choice } from './pyInterface'
 
 export const CardsBracket=({pys}:{pys:Choice[]})=>{

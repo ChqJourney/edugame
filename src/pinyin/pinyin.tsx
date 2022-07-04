@@ -1,5 +1,4 @@
 import React, { useEffect, useReducer } from 'react'
-import ReactModal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
 import useSound from 'use-sound';
 import { initPinyinState, PinyinContext } from '../operations/PinyinContext';
@@ -19,10 +18,13 @@ export const Pinyin=()=>{
     function blur() {
         navigate('/')
     }
-    // useEffect(() => {
-    //     window.addEventListener('blur',blur)
-    //     return () => window.removeEventListener('blur',blur)
-    // },[])
+    useEffect(() => {
+        if(process.env.NODE_ENV!=='development'){
+            window.addEventListener('blur',blur)
+        }
+        return () => window.removeEventListener('blur',blur)
+        // eslint-disable-next-line
+    },[])
     return (
         <PinyinContext.Provider value={{state,dispatch}}>
         <div className="container mx-auto h-screen w-full lg:w-[500px] bg-gradient-to-b from-cyan-300 to-blue-300 flex flex-col justify-between">

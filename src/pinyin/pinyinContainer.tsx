@@ -3,7 +3,6 @@ import ReactModal from "react-modal";
 import useSound from "use-sound";
 import { PinyinContext } from "../operations/PinyinContext";
 import { Header } from "./header";
-import { PinyinNav } from "./pinyinNav";
 import { createPyTis } from "./pyFunc";
 import { PyTi } from "./pyInterface";
 import { QaContainer } from "./qaContainer";

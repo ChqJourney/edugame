@@ -21,10 +21,13 @@ export const CalculatorContainer=()=>{
     function blur() {
         navigate('/')
     }
-    // useEffect(() => {
-    //     window.addEventListener('blur',blur)
-    //     return () => window.removeEventListener('blur',blur)
-    // },[])
+    useEffect(() => {
+        if(process.env.NODE_ENV!=='development'){
+            window.addEventListener('blur',blur)
+        }
+        return () => window.removeEventListener('blur',blur)
+        // eslint-disable-next-line
+    },[])
     return (
         <CalculatorContext.Provider value={{state,dispatch}}>
 
