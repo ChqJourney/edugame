@@ -20,9 +20,8 @@ export const QaContainer = ({ sound,pySound }: { sound: ({ id }: { id: string })
 // TODO:点击“下一题”后，音频播放按钮要保持失效，直至新题加载完毕
 // TODO:题库完整 
     return (
-        <div className='w-full h-[70%] flex flex-col justify-between relative'>
-            {
-                state.tis.length !== 0 ?
+        <div className='w-full h-full flex flex-col justify-between relative'>
+            {state.status!=='idle'?
                     (<>
                         <div className=' justify-center'>
                             <div className='text-center text-gray-800 h-8 mt-4'>{state.tis[state.currentIdx].tiDescription}</div>
@@ -49,10 +48,25 @@ export const QaContainer = ({ sound,pySound }: { sound: ({ id }: { id: string })
                     </div> */}
                     </>) : (
                         <>
-                        <div className='text-center text-3xl my-16 text-sky-600'>点击</div>
-                            <div className='flex justify-center absolute bottom-8 left-[50%] -translate-x-[50%] stroke-emerald-400'>
-                            <svg className='w-36 h-64' viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7396" width="200" height="200"><path d="M448 512V0h128v512h192l-256 256-256-256h192z m576 512H0v-128h1024v128z" fill="#1296db" p-id="7397"></path></svg>
-                            </div>
+                        <div className='absolute flex items-center justify-center top-[10%] left-[50%] -translate-x-[50%] w-36 h-36 border rounded-3xl bg-emerald-400'>
+                            <span className='text-white'>
+
+                            声母
+                            </span>
+                            
+                        </div>
+                        <div className='absolute text-white flex items-center justify-center top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] w-36 h-36 border rounded-3xl bg-orange-400'>
+                            <div className=''>
+                            韵母
+                                </div>
+                                <div>a</div>
+                            <div>o</div>
+                            <div>ai</div>
+                            <div>ong</div>
+                        </div>
+                        <div className='absolute flex items-center justify-center bottom-[10%] left-[50%] -translate-x-[50%] w-36 h-36 border rounded-3xl bg-lime-400'>
+                            <span className='text-white'>混合</span>
+                        </div>
                             </>
                     )
             }

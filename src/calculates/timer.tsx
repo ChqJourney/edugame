@@ -40,7 +40,7 @@ export const Timer = ({ time, status, sounder }: { time: number, status: string,
 
     
     return (
-        <div className={`${reminder?"shake text-red-600":""} font-san`}>
+        <div className={`${reminder?"shake text-red-600":""} font-san text-xl sm:text-3xl`}>
             {timeFormat(sec)}
         </div>
     )

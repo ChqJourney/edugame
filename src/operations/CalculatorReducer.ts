@@ -17,6 +17,29 @@ export type CalculatorAction =
   | { type: "fn_flashStar" }
   | { type: "fn_setRecords"; infos: any[] };
 
+
+function findNextTi(currentIdx:number,total:number,tis:Pigai[]):number{
+    let nextIdx=currentIdx+1;
+    if(nextIdx<total+1){
+      if(tis.every((v,i)=>v.verdict!==undefined)){
+        // 已做一轮
+        nextIdx=tis.findIndex((v,i)=>v.verdict===false)+1
+      }
+    }else{
+      //最后一题做完，如果没错题
+      var next=tis.findIndex((v,i)=>v.verdict===false)+1
+      if(next>0){
+        nextIdx=next;
+      }else{
+        nextIdx=currentIdx
+      }
+
+    }
+    return nextIdx;
+}
+
+
+
 export const CalculatorReducer = (
   state: CalculatorState,
   action: CalculatorAction
@@ -112,21 +135,22 @@ export const CalculatorReducer = (
         tis: action.tis,
       };
     case "fn_confirm":
+      console.log(state)
       return {
         ...state,
-        current: state.current > state.total - 1 ? 1 : state.current + 1,
+        current: findNextTi(state.current,state.total,action.tis),
         tis: action.tis,
-        input: "",
+        input: " ",
       };
     case "fn_delete":
       return {
         ...state,
-        input: state.input.substr(0, state.input.length - 1),
+        input: state.input.substring(0, state.input.length - 1),
       };
     case "fn_clear":
       return {
         ...state,
-        input: "",
+        input: " ",
       };
     default:
       return {

@@ -78,7 +78,7 @@ export const PinyinContainer=({sounder}:{sounder:({id}:{id:string})=>void})=>{
        <>
             <Header sounder={sounder}/>
             <QaContainer sound={sounder} pySound={({id}:{id:string})=>play({id})}/>
-            <PinyinNav/>
+            {/* <PinyinNav/> */}
             <ReactModal className=" absolute top-[50%] left-[50%] border-2 -translate-x-1/2 -translate-y-3/4" shouldCloseOnOverlayClick={false} isOpen={state.modal.showMsg}>
             <div className="bg-zinc-400 w-48 h-36 rounded-md relative flex flex-col justify-center items-center">
                     <button className="absolute top-1 right-3" onClick={()=>dispatch({type:'fn_switchModal',modal:{showMsg:false}})}>X</button>

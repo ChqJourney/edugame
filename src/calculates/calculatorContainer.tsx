@@ -21,10 +21,10 @@ export const CalculatorContainer=()=>{
     function blur() {
         navigate('/')
     }
-    useEffect(() => {
-        window.addEventListener('blur',blur)
-        return () => window.removeEventListener('blur',blur)
-    },[])
+    // useEffect(() => {
+    //     window.addEventListener('blur',blur)
+    //     return () => window.removeEventListener('blur',blur)
+    // },[])
     return (
         <CalculatorContext.Provider value={{state,dispatch}}>
 

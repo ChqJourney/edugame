@@ -53,43 +53,50 @@ const FuncSlot = ({ content, fn,sounder }: { content: any, fn: string,sounder:({
                break
             case 'confirm':
                 let modified = state.tis
-                if(state.tis[state.current-1]?.verdict!==true){
-                    var ans = parseInt(state.input)
-                    modified = state.tis.map((v, i) => {
-                        if (i === state.current - 1) {
-                            
-                            if (state.tis[state.current - 1].answer === ans) {
-                                sounder({id:'correct'})
-                                v.verdict = true
+                if(state.input===' '){
+                    return
+                }
+
+                    // 判断此题是否已答对过
+                    if(state.tis[state.current-1]?.verdict!==true){
+                        // 没答过或没答对过，则更新verdict后，提交tis
+                        var ans = parseInt(state.input)
+                        modified = state.tis.map((v, i) => {
+                            if (i === state.current - 1) {
+                                
+                                if (state.tis[state.current - 1].answer === ans) {
+                                    sounder({id:'correct'})
+                                    v.verdict = true
+                                } else {
+                                    sounder({id:'wrong'})
+                                    v.verdict = false
+                                }
+                                return v
                             } else {
-                                sounder({id:'wrong'})
-                                v.verdict = false
+                                return v
                             }
-                            return v
-                        } else {
-                            return v
-                        }
-                    })
-                    dispatch({ type: 'fn_confirm', tis: modified })
-                    
-                }else{
-                    dispatch({type:"fn_confirm",tis:state.tis})
-                    
-                }
-                if(modified.every(m=>m.verdict===true)){
-                    dispatch({type:'set_game_status',status:'success'})
-                    sounder({id:'success'})
-                    setTimeout(()=>{
-                        dispatch({type:'set_game_status',status:'idle'})
-                        dispatch({type:'fn_reset'})
-                       
-                    },2000)
-                    
-                }
-                break
+                        })
+                        dispatch({ type: 'fn_confirm', tis: modified })
+                        
+                    }else{
+                        dispatch({type:"fn_confirm",tis:state.tis})
+                    }
+                    // 如果每题答案都答对了，则游戏成功，且提示用户
+                    if(modified.every(m=>m.verdict===true)){
+                        dispatch({type:'set_game_status',status:'success'})
+                        sounder({id:'success'})
+                        setTimeout(()=>{
+                            dispatch({type:'set_game_status',status:'idle'})
+                            dispatch({type:'fn_reset'})
+                            
+                        },2000)
+                        
+                    }
+                    return
+                
             case 'delete':
                 dispatch({ type: 'fn_delete' })
-                break
+                return
             default:
                 break
         }

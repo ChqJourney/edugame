@@ -19,7 +19,7 @@ export const Screen = ({ sounder }: { sounder: ({ id }: { id: string }) => void 
             </div>
             <div className=' h-full flex justify-center items-center bg-sky-800 mx-2 rounded-lg py-2 relative'>
                 {state.tis.length === 0 ? "" : <div className='absolute left-2 top-1 text-lg font-bold text-orange-600'><Timer sounder={sounder} status={state.status} time={state.roundTime} /></div>}
-                {state.tis.length === 0 ? "" : <div className='absolute right-6 top-1 text-xl text-lime-600'>{state.current} / {state.total}</div>}
+                {state.tis.length === 0 ? "" : <div className='absolute right-6 top-1 text-xl sm:text-3xl text-lime-600'>{state.current} / {state.total}</div>}
                 {state.tis.length === 0 ? <div className='h-24 text-lg flex items-center sm:text-4xl text-white'>{state.userName}，按开始键游戏......</div> : (
                     <>
                         <DisplayUnit content={state.tis[state.current - 1]?.num1 ?? " "} />
@@ -52,7 +52,7 @@ const DisplayUnit = ({ content }: { content: any }) => {
 const ErrorZone = ({ tis }: { tis: Pigai[] }) => {
 
     return (
-        <div className="absolute bottom-1 left-1 flex space-x-1">
+        <div className="absolute bottom-1 sm:bottom-2 left-1 sm:left-4 flex space-x-1 sm:space-x-4">
             {tis.map((v, i) => {
                 if (v.verdict === false) {
                     return <ErrorIndicator idx={i} key={i} />
@@ -67,6 +67,6 @@ const ErrorIndicator = ({ idx }: { idx: number }) => {
         dispatch({ type: 'fn_setCurrent', current: idx + 1 })
     }
     return (
-        <button onClick={errorClick} className="w-8 h-8 rounded-md bg-gray-700 text-lg text-center text-red-500 flex justify-center items-center p-0">{idx + 1}</button>
+        <button onClick={errorClick} className="w-6 h-6 sm:w-8 sm:h-8 rounded-md bg-gray-400 text-lg text-center text-red-600 flex justify-center items-center p-0">{idx + 1}</button>
     )
 }
