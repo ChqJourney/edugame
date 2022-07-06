@@ -2,42 +2,48 @@ import React, { useContext, useState } from 'react'
 import { PinyinContext } from '../operations/PinyinContext'
 import { CardsBracket } from './cardsBracket'
 import { Judge } from './judge'
+import { Timer } from './timer'
 
-export const QaContainer = ({ sound,pySound }: { sound: ({ id }: { id: string }) => void,pySound: ({ id }: { id: string }) => void }) => {
+export const QaContainer = ({ sound, pySound }: { sound: ({ id }: { id: string }) => void, pySound: ({ id }: { id: string }) => void }) => {
     const { state, dispatch } = useContext(PinyinContext)
     const [showJudge, setShowJudge] = useState(false)
     function confirmSelection() {
         setTimeout(() => {
-            dispatch({ type: 'fn_setCurrentTi', currentTiIdx: state.currentIdx!==9?state.currentIdx + 1:state.currentIdx })
+            dispatch({ type: 'fn_setCurrentTi', currentTiIdx: state.currentIdx !== 9 ? state.currentIdx + 1 : state.currentIdx })
         }, 2000);
         setTimeout(() => { setShowJudge(false) }, 1500);
         setShowJudge(true)
-        if(state.tis.every(ti=>ti.userAnswerIndex===ti.answerIndex)){
-            dispatch({type:'fn_setStatus','status':'success'})
+        if (state.tis.every(ti => ti.userAnswerIndex === ti.answerIndex)) {
+            dispatch({ type: 'fn_setStatus', 'status': 'success' })
         }
     }
-// TODO:实现Error indicator
-// TODO:点击“下一题”后，音频播放按钮要保持失效，直至新题加载完毕
-// TODO:题库完整 
+    function handleClick(txt: string) {
+        dispatch({ type: "fn_switchModal", modal: { showMsg: true, msg: txt } })
+    }
+    // TODO:实现Error indicator
+    // TODO:点击“下一题”后，音频播放按钮要保持失效，直至新题加载完毕
+    // TODO:题库完整 
     return (
-        <div className='w-full h-full flex flex-col justify-between relative'>
-            {state.status!=='idle'?
-                    (<>
-                        <div className=' justify-center'>
-                            <div className='text-center text-gray-800 h-8 mt-4'>{state.tis[state.currentIdx].tiDescription}</div>
-                            <div className='flex justify-center'>
-                                <button className='h-24 w-24 bg-pink-300 border rounded-lg flex justify-center items-center' onClick={() => pySound({ id: state.tis[state.currentIdx].soundId })}><VoiceIcon /></button>
-                            </div>
-                        </div>
-                        <div className='flex space-x-2 justify-center'>
-                        <div className='absolute right-6 top-0 text-xl text-lime-600'>{state.currentIdx+1} / {state.tiQuantity}</div>
-                            <CardsBracket pys={state.tis[state.currentIdx].choices} />
-                        </div>
-                        <Judge show={showJudge} sounder={sound}/>
+        <div className='w-full h-full flex flex-col justify-between py-12 relative'>
+            {state.status !== 'idle' ?
+                (<>
+                <div className='absolute right-6 top-4 text-xl text-lime-600'>{state.currentIdx + 1} / {state.tiQuantity}</div>
+                        <Timer time={60} sounder={sound} status={state.status} />
+                    <div className=' justify-center'>
+                        <div className='text-center text-gray-800 h-8 mt-4'>{state.tis[state.currentIdx].tiDescription}</div>
                         <div className='flex justify-center'>
-                            <button onClick={confirmSelection} className='h-12 w-48 bg-sky-400 rounded-lg drop-shadow-md flex justify-center items-center'>下一题</button>
+                            <button className='h-24 w-24 bg-pink-300 border rounded-lg flex justify-center items-center' onClick={() => pySound({ id: state.tis[state.currentIdx].soundId })}><VoiceIcon /></button>
                         </div>
-                        {/* <div className='flex justify-center space-x-20'>
+                    </div>
+                    <div className='flex space-x-2 justify-center'>
+                        
+                        <CardsBracket pys={state.tis[state.currentIdx].choices} />
+                    </div>
+                    <Judge show={showJudge} sounder={sound} />
+                    <div className='flex justify-center'>
+                        <button onClick={confirmSelection} className='h-12 w-48 bg-sky-400 rounded-lg drop-shadow-md flex justify-center items-center'>下一题</button>
+                    </div>
+                    {/* <div className='flex justify-center space-x-20'>
                         <button onClick={confirmSelection} className='bg-sky-500 rounded-lg drop-shadow-md w-20 h-16 flex justify-center items-center'>
                             <svg xmlns="http://www.w3.org/2000/svg" className='h-12 w-12 fill-pink-500' viewBox="0 0 24 24"><g data-name="5.Cancel"><path d="M12 24a12 12 0 1 1 12-12 12.013 12.013 0 0 1-12 12zm0-22a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2z" /><path d="m7.292 8.707 1.415-1.414 8 8-1.414 1.414z" /><path d="m7.292 15.293 8-8 1.415 1.414-8 8z" /></g></svg>
                         </button>
@@ -46,29 +52,31 @@ export const QaContainer = ({ sound,pySound }: { sound: ({ id }: { id: string })
                         </button>
 
                     </div> */}
-                    </>) : (
-                        <>
-                        <div className='absolute flex items-center justify-center top-[10%] left-[50%] -translate-x-[50%] w-36 h-36 border rounded-3xl bg-emerald-400'>
-                            <span className='text-white'>
-
-                            声母
-                            </span>
-                            
-                        </div>
-                        <div className='absolute text-white flex items-center justify-center top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] w-36 h-36 border rounded-3xl bg-orange-400'>
+                </>) : (
+                    <>
+                        <div onClick={() => handleClick('声母')} className='absolute text-white flex flex-col items-center justify-center top-[10%] left-[50%] -translate-x-[50%] w-36 h-36 border rounded-3xl bg-emerald-400'>
                             <div className=''>
-                            韵母
-                                </div>
-                                <div>a</div>
-                            <div>o</div>
-                            <div>ai</div>
-                            <div>ong</div>
+                                声母认读
+                            </div>
+                            <div>b p m f</div>
+                            <div>d t n l</div>
                         </div>
-                        <div className='absolute flex items-center justify-center bottom-[10%] left-[50%] -translate-x-[50%] w-36 h-36 border rounded-3xl bg-lime-400'>
-                            <span className='text-white'>混合</span>
+                        <div onClick={() => handleClick('韵母')} className='absolute text-white flex flex-col items-center justify-center top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] w-36 h-36 border rounded-3xl bg-orange-400'>
+                            <div className=''>
+                                韵母认读
+                            </div>
+                            <div>a o e</div>
+                            <div>an en ang eng</div>
                         </div>
-                            </>
-                    )
+                        <div onClick={() => handleClick('混合')} className='absolute flex flex-col text-white items-center justify-center bottom-[10%] left-[50%] -translate-x-[50%] w-36 h-36 border rounded-3xl bg-lime-500'>
+                            <div className=''>
+                                韵母认读
+                            </div>
+                            <div>zhi chi shi</div>
+                            <div>yi wu yu</div>
+                        </div>
+                    </>
+                )
             }
 
         </div>

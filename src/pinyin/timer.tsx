@@ -35,7 +35,7 @@ export const Timer=({time,status,sounder}:{time:number,status:string,sounder:({i
         // eslint-disable-next-line
     }, [sec, time, status])
     return (
-        <div className='text-lg font-bold text-orange-600'>
+        <div className='text-lg font-bold border border-lime-600 rounded-md px-2 text-orange-600 absolute left-2 top-4'>
         <div className={`${reminder?"shake text-red-600":""} font-san`}>
             {timeFormat(sec)}
         </div>

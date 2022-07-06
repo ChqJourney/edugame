@@ -9,4 +9,4 @@ export interface FocusReducerProps{
     dispatch:Dispatch<Action>
 }
 
-export const FocusContext=React.createContext<FocusReducerProps>({state:initState,dispatch:()=>undefined});
+export const FocusContext=React.createContext<FocusReducerProps>({state:initState,dispatch:()=>undefined})
