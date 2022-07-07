@@ -3,6 +3,7 @@ import { PinyinContext } from '../operations/PinyinContext'
 import { CardsBracket } from './cardsBracket'
 import { Judge } from './judge'
 import { Timer } from './timer'
+import {PyTi} from './pyInterface'
 
 export const QaContainer = ({ sound, pySound }: { sound: ({ id }: { id: string }) => void, pySound: ({ id }: { id: string }) => void }) => {
     const { state, dispatch } = useContext(PinyinContext)
@@ -39,6 +40,7 @@ export const QaContainer = ({ sound, pySound }: { sound: ({ id }: { id: string }
                         
                         <CardsBracket pys={state.tis[state.currentIdx].choices} />
                     </div>
+                    <ErrorZone tis={state.tis}/>
                     <Judge show={showJudge} sounder={sound} />
                     <div className='flex justify-center'>
                         <button onClick={confirmSelection} className='h-12 w-48 bg-sky-400 rounded-lg drop-shadow-md flex justify-center items-center'>下一题</button>
@@ -104,5 +106,26 @@ export const CancelBtn = () => {
         <button className='bg-sky-500 rounded-lg drop-shadow-md w-20 h-20 flex justify-center items-center'>
             <svg xmlns="http://www.w3.org/2000/svg" className='h-16 w16 fill-pink-500' viewBox="0 0 24 24"><g data-name="5.Cancel"><path d="M12 24a12 12 0 1 1 12-12 12.013 12.013 0 0 1-12 12zm0-22a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2z" /><path d="m7.292 8.707 1.415-1.414 8 8-1.414 1.414z" /><path d="m7.292 15.293 8-8 1.415 1.414-8 8z" /></g></svg>
         </button>
+    )
+}
+const ErrorZone = ({ tis }: { tis:PyTi[] }) => {
+
+    return (
+        <div className="absolute bottom-1 sm:bottom-2 left-1 sm:left-4 flex space-x-1 sm:space-x-4">
+            {tis.map((v, i) => {
+                if (v.userAnswerIndex!==undefined&&v.answerIndex!==v.userAnswerIndex) {
+                    return <ErrorIndicator idx={i} key={i} />
+                } else { return "" }
+            })}
+        </div>
+    )
+}
+const ErrorIndicator = ({ idx }: { idx: number }) => {
+    const { dispatch } = useContext(PinyinContext)
+    const errorClick = () => {
+        dispatch({ type: 'fn_setCurrentTi', currentTiIdx: idx })
+    }
+    return (
+        <button onClick={errorClick} className="w-6 h-6 sm:w-8 sm:h-8 rounded-md bg-gray-400 text-lg text-center text-red-600 flex justify-center items-center p-0">{idx + 1}</button>
     )
 }
