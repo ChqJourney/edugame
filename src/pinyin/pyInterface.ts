@@ -10,7 +10,8 @@ export interface PyTi{
     soundId:string
     choices:Choice[]
     answerIndex:number
-    userAnswerIndex:number
+    userAnswerIndex?:number,
+    isFinished:boolean
 }
 export interface Choice{
     answerDescription:string

@@ -8,6 +8,7 @@ import {PyTi} from './pyInterface'
 export const QaContainer = ({ sound, pySound }: { sound: ({ id }: { id: string }) => void, pySound: ({ id }: { id: string }) => void }) => {
     const { state, dispatch } = useContext(PinyinContext)
     const [showJudge, setShowJudge] = useState(false)
+
     function confirmSelection() {
         setTimeout(() => {
             dispatch({ type: 'fn_setCurrentTi', currentTiIdx: state.currentIdx !== 9 ? state.currentIdx + 1 : state.currentIdx })
@@ -38,7 +39,7 @@ export const QaContainer = ({ sound, pySound }: { sound: ({ id }: { id: string }
                     </div>
                     <div className='flex space-x-2 justify-center'>
                         
-                        <CardsBracket pys={state.tis[state.currentIdx].choices} />
+                        <CardsBracket pys={state.tis[state.currentIdx].choices}/>
                     </div>
                     <ErrorZone tis={state.tis}/>
                     <Judge show={showJudge} sounder={sound} />
@@ -60,22 +61,22 @@ export const QaContainer = ({ sound, pySound }: { sound: ({ id }: { id: string }
                             <div className=''>
                                 声母认读
                             </div>
-                            <div>b p m f</div>
-                            <div>d t n l</div>
+                            <div className='text-lg font-mono '>b p m f</div>
+                            <div className='text-lg text-center font-mono '>d t n l</div>
                         </div>
                         <div onClick={() => handleClick('韵母')} className='absolute text-white flex flex-col items-center justify-center top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] w-36 h-36 border rounded-3xl bg-orange-400'>
                             <div className=''>
                                 韵母认读
                             </div>
-                            <div>a o e</div>
-                            <div>an en ang eng</div>
+                            <div className='text-lg font-mono '>a o e</div>
+                            <div className='text-lg text-center font-mono '>an en in</div>
                         </div>
                         <div onClick={() => handleClick('混合')} className='absolute flex flex-col text-white items-center justify-center bottom-[10%] left-[50%] -translate-x-[50%] w-36 h-36 border rounded-3xl bg-lime-500'>
                             <div className=''>
-                                韵母认读
+                                整体认读
                             </div>
-                            <div>zhi chi shi</div>
-                            <div>yi wu yu</div>
+                            <div className='text-lg font-mono '>zhi chi shi</div>
+                            <div className='text-lg text-center font-mono '>yi wu yu</div>
                         </div>
                     </>
                 )
@@ -113,7 +114,7 @@ const ErrorZone = ({ tis }: { tis:PyTi[] }) => {
     return (
         <div className="absolute bottom-1 sm:bottom-2 left-1 sm:left-4 flex space-x-1 sm:space-x-4">
             {tis.map((v, i) => {
-                if (v.userAnswerIndex!==undefined&&v.answerIndex!==v.userAnswerIndex) {
+                if (v.userAnswerIndex!==undefined&&v.answerIndex!==v.userAnswerIndex&&v.isFinished) {
                     return <ErrorIndicator idx={i} key={i} />
                 } else { return "" }
             })}

@@ -34,6 +34,12 @@ export const PinyinReducer = (
     case "fn_setCurrentTi":
       return {
         ...state,
+        tis:state.tis.map((ti,idx)=>{
+          if(idx===state.currentIdx){
+            return {...ti,isFinished:true}
+          }
+          return ti
+        }),
         currentIdx: action.currentTiIdx,
       };
     case "fn_recordUserAnswer":
@@ -43,7 +49,7 @@ export const PinyinReducer = (
           if (idx === state.currentIdx) {
             return {
               ...ti,
-              userAnswerIndex: action.userAnswerIdx,
+              userAnswerIndex: action.userAnswerIdx
             };
           }
           return ti;
