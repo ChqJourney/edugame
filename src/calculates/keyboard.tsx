@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Prompt } from "../common/prompt";
 import { CalculatorContext } from "../operations/CalculatorContext";
 import { Pigai } from "../operations/CalculatorReducer";
 
@@ -32,15 +33,33 @@ export const Keyboard = ({sounder}:{sounder:(id:any)=>void}) => {
 
 const FuncSlot = ({ content, fn,sounder }: { content: any, fn: string,sounder:({id}:{id:string})=>void }) => {
     const { state, dispatch } = useContext(CalculatorContext)
+    function StartAction(){
+        var tis = createRandomTis({ quantity: state.total, mode: state.calType })
+        setTimeout(()=>{
+            dispatch({ type: 'fn_createQs', tis: tis })
+            dispatch({ type: 'set_game_status',status:"running" })
+        },2300)
+        dispatch({type:'fn_msg',showMsg:false})
+        sounder({id:'start'})
+    }
+    function CancelAction(){
+        dispatch({type:'fn_msg',showMsg:false})
+    }
+    function confirmCancel(){
+        dispatch({ type: 'fn_createQs', tis: [] })
+        dispatch({type:'fn_clear'})
+        dispatch({ type: 'set_game_status',status:'idle' })
+        dispatch({type:'fn_msg',showMsg:false})
+    }
     const handleClick = () => {
         switch (fn) {
             case 'power':
                 if (state.status === "idle") {
                     
-                    dispatch({type:'fn_msg',modal:<ConfirmModal sounder={sounder}/>,showMsg:!state.showMsg})
+                    dispatch({type:'fn_msg',modal:<Prompt content="开始游戏吗？" positiveCallback={StartAction} negativeCallback={CancelAction}/>,showMsg:!state.showMsg})
                     
                 } else {
-                    dispatch({type:'fn_msg',modal:<CancelModal sounder={sounder}/>,showMsg:!state.showMsg})
+                    dispatch({type:'fn_msg',modal:<Prompt content="停止游戏吗？" positiveCallback={confirmCancel} negativeCallback={CancelAction}/>,showMsg:!state.showMsg})
                    
                 }
                 break
@@ -202,51 +221,3 @@ const createRandomTi = ({ mode }: { mode: string }): Pigai => {
     return { num1: num1, num2: num2, operator: operatorList[operatorIdx], answer: num3, verdict: undefined }
 }
 
-const ConfirmModal=({sounder}:{sounder:({id}:{id:string})=>void})=>{
-    const {state,dispatch}=useContext(CalculatorContext)
-
-    const startAct=()=>{
-        var tis = createRandomTis({ quantity: state.total, mode: state.calType })
-        setTimeout(()=>{
-            dispatch({ type: 'fn_createQs', tis: tis })
-            dispatch({ type: 'set_game_status',status:"running" })
-        },2300)
-        dispatch({type:'fn_msg',showMsg:false})
-        sounder({id:'start'})
-    }
-
-    return (
-        <div className="bg-zinc-400 w-48 h-36 rounded-md relative flex flex-col justify-center items-center">
-                    <button className="absolute top-1 right-3" onClick={()=>dispatch({type:'fn_msg',showMsg:false})}>X</button>
-                    <div className="text-lg text-red-500 font-semibold mb-2">开始吗？</div>
-                    <div className="flex space-x-2">
-                    <button className="w-16 h-10 rounded-md left-2 bg-orange-500" onClick={()=>startAct()}>确定</button>
-                    <button className="w-16 h-10 rounded-md right-2 bg-stone-500" onClick={()=>dispatch({type:'fn_msg',showMsg:false})}>取消</button>
-                    </div>
-                </div>
-    )
-}
-
-const CancelModal=({sounder}:{sounder:({id}:{id:string})=>void})=>{
-    const {dispatch}=useContext(CalculatorContext)
-
-    const cancelAct=()=>{
-        
-        dispatch({ type: 'fn_createQs', tis: [] })
-        dispatch({type:'fn_clear'})
-        dispatch({ type: 'set_game_status',status:'idle' })
-        dispatch({type:'fn_msg',showMsg:false})
-    }
-
-    return (
-        <div className="bg-zinc-400 w-48 h-36 rounded-md relative flex flex-col justify-center items-center">
-                    <button className="absolute top-1 right-3" onClick={()=>dispatch({type:'fn_msg',showMsg:false})}>X</button>
-                    <div className="text-lg text-red-500 font-semibold mb-2" >取消吗？</div>
-                    <div className="flex space-x-2">
-
-                    <button className="w-16 h-10 rounded-md left-2 bg-orange-500" onClick={()=>cancelAct()}>确定</button>
-                    <button className="w-16 h-10 rounded-md right-2 bg-stone-500" onClick={()=>dispatch({type:'fn_msg',showMsg:false})}>取消</button>
-                    </div>
-                </div>
-    )
-}

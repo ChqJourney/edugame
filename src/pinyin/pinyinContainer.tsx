@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import ReactModal from "react-modal";
 import useSound from "use-sound";
+import { Prompt } from "../common/prompt";
 import { PinyinContext } from "../operations/PinyinContext";
 import { Header } from "./header";
 import { createPyTis } from "./pyFunc";
@@ -10,6 +11,7 @@ import { QaContainer } from "./qaContainer";
 export const PinyinContainer = ({ sounder }: { sounder: ({ id }: { id: string }) => void }) => {
     const { state, dispatch } = useContext(PinyinContext)
     // TODO: 音效音量调大
+    // TODO: 增加停止游戏按钮
     const [play] = useSound('assets/sounds/pysounds.mp3', {
         sprite: {
             'a': [35246, 1000],
@@ -79,15 +81,9 @@ export const PinyinContainer = ({ sounder }: { sounder: ({ id }: { id: string })
             <Header sounder={sounder} />
             <QaContainer sound={sounder} pySound={({ id }: { id: string }) => play({ id })} />
             {/* <PinyinNav/> */}
-            <ReactModal className=" absolute top-[50%] left-[50%] border-2 -translate-x-1/2 -translate-y-3/4" shouldCloseOnOverlayClick={false} isOpen={state.modal.showMsg}>
-                <div className="bg-zinc-400 w-48 h-36 rounded-md relative flex flex-col justify-center items-center">
-                    <button className="absolute top-1 right-3" onClick={() => dispatch({ type: 'fn_switchModal', modal: { showMsg: false } })}>X</button>
-                    <div className="text-lg text-red-500 font-semibold mb-2">开始吗？</div>
-                    <div className="flex space-x-2">
-                        <button className="w-16 h-10 rounded-md left-2 bg-orange-500" onClick={() => startAct()}>确定</button>
-                        <button className="w-16 h-10 rounded-md right-2 bg-stone-500" onClick={() => dispatch({ type: 'fn_switchModal', modal: { showMsg: false } })}>取消</button>
-                    </div>
-                </div>
+            <ReactModal className=" absolute top-[50%] left-[50%] border-2 -translate-x-1/2 outline-none -translate-y-3/4" shouldCloseOnOverlayClick={false} isOpen={state.modal.showMsg}>
+                <Prompt content="开始游戏吗？" positiveCallback={startAct} negativeCallback={()=>dispatch({ type: 'fn_switchModal', modal: { showMsg: false } })}/>
+                
             </ReactModal>
         </>
 

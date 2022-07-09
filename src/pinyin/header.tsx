@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { PinyinContext } from "../operations/PinyinContext";
-import { Timer } from "./timer";
+import { PinyinContext } from "../operations/PinyinContext"
 
 export const Header=({sounder}:{sounder:({id}:{id:string})=>void})=>{
     const navigate=useNavigate()

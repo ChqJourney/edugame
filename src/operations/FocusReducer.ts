@@ -8,6 +8,7 @@ export interface FocusState {
   arr?: any[];
   recordLevel:string,
   records: any[];
+  modalVisible: boolean;
 }
 export enum Status{
   idle,
@@ -23,9 +24,15 @@ export type Action =
       arr: any[];
     }
   | { type: "set_game_records"; records: any[],recordLevel:string }
+  |{type:'showModal',visible:boolean}
+  |{type:'set_stop',status:string,'btnText':string}
 
 export const FocusReducer = (state: FocusState, action: Action): FocusState => {
   switch (action.type) {
+    case "set_stop":
+      return { ...state, status: action.status, btnText: action.btnText };
+    case "showModal":
+      return { ...state, modalVisible: action.visible };
     case "set_game_status":
       return {
         ...state,

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import { PinyinContext } from "../operations/PinyinContext";
 import { transformPyString } from "./pyFunc";
 

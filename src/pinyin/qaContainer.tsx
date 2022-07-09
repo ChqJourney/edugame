@@ -22,7 +22,6 @@ export const QaContainer = ({ sound, pySound }: { sound: ({ id }: { id: string }
     function handleClick(txt: string) {
         dispatch({ type: "fn_switchModal", modal: { showMsg: true, msg: txt } })
     }
-    // TODO:实现Error indicator
     // TODO:点击“下一题”后，音频播放按钮要保持失效，直至新题加载完毕
     // TODO:题库完整 
     return (
@@ -34,7 +33,10 @@ export const QaContainer = ({ sound, pySound }: { sound: ({ id }: { id: string }
                     <div className=' justify-center'>
                         <div className='text-center text-gray-800 h-8 mt-4'>{state.tis[state.currentIdx].tiDescription}</div>
                         <div className='flex justify-center'>
-                            <button className='h-24 w-24 bg-pink-300 border rounded-lg flex justify-center items-center' onClick={() => pySound({ id: state.tis[state.currentIdx].soundId })}><VoiceIcon /></button>
+                            <button className='h-24 w-24 bg-pink-300 border rounded-lg flex justify-center items-center' onClick={() =>{
+                                if(!showJudge){ 
+                                    pySound({ id: state.tis[state.currentIdx].soundId })
+                                }}}><VoiceIcon /></button>
                         </div>
                     </div>
                     <div className='flex space-x-2 justify-center'>

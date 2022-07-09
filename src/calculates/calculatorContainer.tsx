@@ -36,7 +36,7 @@ export const CalculatorContainer=()=>{
             <Screen sounder={({id}:{id:string})=>play({id})}/>
             <Keyboard sounder={(id:any)=>play(id)}/>
             <Infos/>
-            <Modal className=" absolute top-[50%] left-[50%] border-2 -translate-x-1/2 -translate-y-3/4" shouldCloseOnOverlayClick={false} isOpen={state.showMsg}>
+            <Modal className=" absolute top-[50%] rounded-lg left-[50%] border border-slate-500 -translate-x-1/2 -translate-y-3/4" shouldCloseOnOverlayClick={false} isOpen={state.showMsg}>
                 {state.modal}
             </Modal>
         </div>
