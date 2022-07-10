@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import ReactModal from "react-modal";
 import useSound from "use-sound";
+import { ActionSheet } from "../common/actionSheet";
 import { Prompt } from "../common/prompt";
 import { PinyinContext } from "../operations/PinyinContext";
 import { Header } from "./header";
@@ -80,11 +81,11 @@ export const PinyinContainer = ({ sounder }: { sounder: ({ id }: { id: string })
         <>
             <Header sounder={sounder} />
             <QaContainer sound={sounder} pySound={({ id }: { id: string }) => play({ id })} />
-            {/* <PinyinNav/> */}
             <ReactModal className=" absolute top-[50%] left-[50%] border-2 -translate-x-1/2 outline-none -translate-y-3/4" shouldCloseOnOverlayClick={false} isOpen={state.modal.showMsg}>
                 <Prompt content="开始游戏吗？" positiveCallback={startAct} negativeCallback={()=>dispatch({ type: 'fn_switchModal', modal: { showMsg: false } })}/>
                 
             </ReactModal>
+            
         </>
 
     )

@@ -1,23 +1,25 @@
 import React, { useContext } from "react";
+import { ActionSheet } from "../common/actionSheet";
 import { FocusContext } from "../operations/FocusContext";
 import { createRandomArray } from "./bracket";
 
 export const DimensionSelector = () => {
     const { state, dispatch } = useContext(FocusContext)
-    const handleDimensionChange = (e: any) => {
-        
+    function confirmDimension(idStr:string){
         if (state.status !== 'running') {
-            dispatch({ type: 'set_game_parameter', dimension: e.target.value, roundTime: fitRoundTime(parseInt(e.target.value)), arr: createRandomArray(e.target.value * e.target.value) })
+            dispatch({ type: 'set_game_parameter', dimension: parseInt(idStr), roundTime: fitRoundTime(parseInt(idStr)), arr: createRandomArray(parseInt(idStr) * parseInt(idStr)) })
         }
-        dispatch({ type: 'set_game_records', recordLevel: `${e.target.value} x ${e.target.value}`, records: JSON.parse(localStorage.getItem('records-focus') ?? "")[`${e.target.value} x ${e.target.value}`] })
-    }
+        console.log(idStr)
+        dispatch({ type: 'set_game_records', recordLevel: `${idStr} x ${idStr}`, records: JSON.parse(localStorage.getItem('records-focus') ?? "")[`${idStr} x ${idStr}`] })
+        dispatch({type:'showModal',visible:false})
+      }
+      function cancelAction(){
+        dispatch({type:'showModal',visible:false})
+      }
     return (
-        <select className="w-28 border outline-none rounded-md pl-4 mx-1 cursor-pointer hover:scale-105" onChange={e => handleDimensionChange(e)}>
-            <option value={3}>3 x 3</option>
-            <option value={4}>4 x 4</option>
-            <option value={5}>5 x 5</option>
-            <option value={6}>6 x 6</option>
-        </select>
+        <div className="w-24 border outline-none rounded-md mx-1 text-xl cursor-pointer flex items-center justify-center hover:scale-105" onClick={()=>dispatch({type:'showActionSheet',visible:true,actionSheet:<ActionSheet options={["3 x 3","4 x 4","5 x 5", "6 x 6"]} confirmCallback={confirmDimension} cancelCallback={cancelAction}/> })}>
+            {state.dimension} x {state.dimension}
+        </div>
     )
 }
 function fitRoundTime(di: number): number {
