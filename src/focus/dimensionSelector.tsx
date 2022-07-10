@@ -11,10 +11,10 @@ export const DimensionSelector = () => {
         }
         console.log(idStr)
         dispatch({ type: 'set_game_records', recordLevel: `${idStr} x ${idStr}`, records: JSON.parse(localStorage.getItem('records-focus') ?? "")[`${idStr} x ${idStr}`] })
-        dispatch({type:'showModal',visible:false})
+        dispatch({type:'showActionSheet',visible:false})
       }
       function cancelAction(){
-        dispatch({type:'showModal',visible:false})
+        dispatch({type:'showActionSheet',visible:false})
       }
     return (
         <div className="w-24 border outline-none rounded-md mx-1 text-xl cursor-pointer flex items-center justify-center hover:scale-105" onClick={()=>dispatch({type:'showActionSheet',visible:true,actionSheet:<ActionSheet options={["3 x 3","4 x 4","5 x 5", "6 x 6"]} confirmCallback={confirmDimension} cancelCallback={cancelAction}/> })}>

@@ -6,7 +6,6 @@ import { Records } from "./records";
 import { Title } from "./title";
 import Modal from 'react-modal'
 import { Prompt } from "../common/prompt";
-import { ActionSheet } from "../common/actionSheet";
 
 export const GameBox = () => {
     const {state,dispatch}=useContext(FocusContext);
