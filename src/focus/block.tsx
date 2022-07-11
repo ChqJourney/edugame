@@ -8,8 +8,6 @@ export const Block = ({ num, status, sounder }: { num: number, status: string, s
     if(status==='idle'){
         content=<MagIcon/>
     }
-    
-    
     const handleClick = () => {
         if (status.includes('running') && num !== 0) {
             let modifiedArr = [];
@@ -28,11 +26,8 @@ export const Block = ({ num, status, sounder }: { num: number, status: string, s
                     dispatch({ type: 'set_game_status', status: 'success', arr: modifiedArr, btnText: 'well done!' })
                 } else {
                     sounder({ id: 'correct' })
-                    console.log(modifiedArr)
-                    console.log(state.arr)
-                    dispatch({ type: 'set_game_status', status: "running_click_success", btnText: state.btnText, arr: modifiedArr })
+                    dispatch({ type: 'set_array', arr: modifiedArr })
                 }
-
             } else {
                 sounder({ id: 'wrong' })
                 setWrong(true)

@@ -6,10 +6,11 @@ import { createRandomArray } from "./bracket";
 export const DimensionSelector = () => {
     const { state, dispatch } = useContext(FocusContext)
     function confirmDimension(idStr:string){
+        idStr=idStr.substring(0,1)
+        console.log(createRandomArray(parseInt(idStr) * parseInt(idStr)))
         if (state.status !== 'running') {
             dispatch({ type: 'set_game_parameter', dimension: parseInt(idStr), roundTime: fitRoundTime(parseInt(idStr)), arr: createRandomArray(parseInt(idStr) * parseInt(idStr)) })
         }
-        console.log(idStr)
         dispatch({ type: 'set_game_records', recordLevel: `${idStr} x ${idStr}`, records: JSON.parse(localStorage.getItem('records-focus') ?? "")[`${idStr} x ${idStr}`] })
         dispatch({type:'showActionSheet',visible:false})
       }

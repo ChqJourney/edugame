@@ -17,19 +17,30 @@ export const GameBox = () => {
         'start':[10106,2050]
     }})
     function blur(){
-        dispatch({type:'set_stop',status:'suspend',btnText:'Suspend'})
+        if(state.status==='running'){
+            dispatch({type:'set_stop',status:'stop',btnText:'Suspend'})
+        }else{
+            dispatch({type:'set_stop',status:'idle_suspend',btnText:state.btnText??'Start'})
+        }
     }
     function active(){
         dispatch({type:'showModal',visible:true,modal:<Prompt content='回到游戏？'  positiveCallback={resume} negativeCallback={cancel}/>})
     }
     function resume(){
         dispatch({type:'showModal',visible:false})
-        console.log(state.arr)
-          dispatch({type:'set_game_status',status:'running',btnText:'Stop',arr:state.arr})
+        if(state.status==='stop'){
+            dispatch({type:'set_game_status',status:'running',btnText:'Stop',arr:state.arr})
+        }else{
+            dispatch({type:'set_game_status',status:'idle',btnText:'Start',arr:state.arr})
+        }
       }
       function cancel(){
-
-        dispatch({type:'set_game_status',status:'idle',btnText:'Start',arr:createRandomArray(state.dimension*state.dimension)})
+        console.log(state.status)
+        if(state.status==='suspend'){
+            console.log('in')
+            dispatch({type:'set_game_status',status:'idle',btnText:'Start',arr:state.arr})
+            dispatch({type:'set_game_parameter',dimension:state.dimension,roundTime:state.roundTime,arr:createRandomArray(state.dimension*state.dimension)})
+        }
         dispatch({type:'showModal',visible:false})
       }
     useEffect(()=>{

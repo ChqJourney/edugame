@@ -35,10 +35,13 @@ export type Action =
   | { type: "set_game_records"; records: any[]; recordLevel: string }
   | { type: "showModal"; visible: boolean; modal?: any }
   | { type: "showActionSheet"; visible: boolean; actionSheet?: any }
-  | { type: "set_stop"; status: string; btnText: string };
+  | { type: "set_stop"; status: string; btnText: string }
+  | {type:"set_array";arr:any[]}
 
 export const FocusReducer = (state: FocusState, action: Action): FocusState => {
   switch (action.type) {
+    case "set_array":
+      return { ...state, arr:action.arr };
     case "set_stop":
       return { ...state, status: action.status, btnText: action.btnText };
     case "showModal":
@@ -50,6 +53,7 @@ export const FocusReducer = (state: FocusState, action: Action): FocusState => {
         actionSheet: action.actionSheet,
       };
     case "set_game_status":
+      console.log(action.status);
       return {
         ...state,
         status: action.status,

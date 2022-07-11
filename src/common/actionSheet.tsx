@@ -16,6 +16,6 @@ export const ActionSheet=({options,confirmCallback,cancelCallback}:{options:stri
 const SheetOption=({option,callback}:{option:string,callback:(idStr:string)=>void})=>{
 
     return (
-        <div onClick={()=>callback(option.substring(0,1))} className="text-slate-800 cursor-pointer h-12 border rounded-md bg-white flex justify-center items-center text-2xl ">{option}</div>
+        <div onClick={()=>callback(option)} className="text-slate-800 cursor-pointer h-12 border rounded-md bg-white flex justify-center items-center text-2xl ">{option}</div>
     )
 }

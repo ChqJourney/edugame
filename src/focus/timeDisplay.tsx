@@ -35,7 +35,6 @@ export const TimerDisplay = ({ time, status,sounder }: { time: number, status: s
             setTimeout(() => {
                 dispatch({type:'set_game_status',status:'idle',leftTime:sec,btnText:'Start'})
                 dispatch({type:'set_game_parameter',roundTime:state.roundTime,dimension:state.dimension,arr:createRandomArray(state.dimension*state.dimension)})
-              
             }, 2000);
             const rs=validateAndPersistanceRecords(state.records??[],{time:state.roundTime-sec,createdAt:new Date().toLocaleString(),user:state.userName});
             dispatch({type:'set_game_records',recordLevel:`${state.dimension} x ${state.dimension}`,records:rs})
@@ -44,13 +43,17 @@ export const TimerDisplay = ({ time, status,sounder }: { time: number, status: s
             let obj:any=str?JSON.parse(str):{}
             obj[level]=[...rs]
             localStorage.setItem('records-focus',JSON.stringify(obj))
+        }else{
+            console.log(state.status)
         }
         return () => clearInterval(interval)
          // eslint-disable-next-line
-    }, [sec, status,time])
+    }, [sec, status])
 
     useEffect(()=>{
+        console.log(state.status)
         dispatch({type:'set_game_status',status:'idle',btnText:state.btnText,arr:state.arr})
+
          // eslint-disable-next-line
     },[time])
     return (
