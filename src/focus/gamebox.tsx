@@ -20,7 +20,7 @@ export const GameBox = () => {
         if(state.status==='running'){
             dispatch({type:'set_stop',status:'stop',btnText:'Suspend'})
         }else{
-            dispatch({type:'set_stop',status:'idle_suspend',btnText:state.btnText??'Start'})
+            dispatch({type:'set_stop',status:'idle_stop',btnText:state.btnText??'Start'})
         }
     }
     function active(){

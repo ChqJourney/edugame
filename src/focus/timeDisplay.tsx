@@ -24,7 +24,6 @@ export const TimerDisplay = ({ time, status,sounder }: { time: number, status: s
                     setTimeout(() => {
                         dispatch({type:'set_game_status',status:'idle',leftTime:state.leftTime,arr:state.arr,btnText:'Start'})
                         dispatch({type:'set_game_parameter',roundTime:state.roundTime,dimension:state.dimension,arr:createRandomArray(state.dimension*state.dimension)})
-                        
                     }, 2000);
                 }
             }else if(state.status==='idle'){

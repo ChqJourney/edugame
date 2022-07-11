@@ -5,7 +5,7 @@ export const Block = ({ num, status, sounder }: { num: number, status: string, s
     const { state, dispatch } = useContext(FocusContext)
     const [wrong, setWrong] = useState(false)
     let content: any = num
-    if(status==='idle'){
+    if(status==='idle'||status==='stop'||status==='idle_stop'){
         content=<MagIcon/>
     }
     const handleClick = () => {

@@ -4,7 +4,6 @@ import { FocusContext } from "../operations/FocusContext";
 import { createRandomArray } from "./bracket";
 import { DimensionSelector } from "./dimensionSelector";
 import { InfoBar } from "./infoBar";
-import { TimerDisplay } from "./timeDisplay";
 
 //react-hooks/exhaustive-deps
 
