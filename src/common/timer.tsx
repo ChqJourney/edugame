@@ -26,6 +26,7 @@ export const Timer = ({ duration = 60, warningFromLeftSeconds = 0, operation, on
                 break
             case 'success':
                 setReminder(false)
+                console.log('next run success')
                 onSuccessCallback(sec)
                 setTime(sec=>duration)
                 break
@@ -39,7 +40,7 @@ export const Timer = ({ duration = 60, warningFromLeftSeconds = 0, operation, on
 
 
     return (
-        <div className={`${reminder ? "animate-pulse border-red-500" : "border-sky-400"} text-2xl w-24 border-2 text-center rounded-md px-2 mx-1 justify-center text-lime-700 flex items-center font-sans font-semibold`}>
+        <div className={`${reminder ? "animate-pulse border-red-500" : "border-sky-400"} text-xl sm:text-2xl border-2 text-center rounded-md px-2 mx-1 justify-center text-lime-700 flex items-center font-sans font-semibold`}>
             {timeFormat(sec)}
         </div>
     )

@@ -135,7 +135,6 @@ export const CalculatorReducer = (
         tis: action.tis,
       };
     case "fn_confirm":
-      console.log(state)
       return {
         ...state,
         current: findNextTi(state.current,state.total,action.tis),

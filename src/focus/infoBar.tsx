@@ -4,7 +4,7 @@ import { FocusContext } from "../operations/FocusContext";
 
 export const InfoBar=()=>{
     const {state}=useContext(FocusContext)
-    const time=(state.leftTime!==undefined&&state.leftTime<500)?state.leftTime:""
+    const time=(state.leftTime!==undefined&&state.leftTime<500)?state.roundTime-state.leftTime:""
     return (
         <div className="flex my-4 mx-2 md:mx-4">
             <div className=" text-base text-sky-700 font-semibold font-sans">Last game spend:</div>

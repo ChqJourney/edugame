@@ -103,6 +103,7 @@ const FuncSlot = ({ content, fn,sounder }: { content: any, fn: string,sounder:({
                     if(modified.every(m=>m.verdict===true)){
                         dispatch({type:'set_game_status',status:'success'})
                         sounder({id:'success'})
+                        
                         setTimeout(()=>{
                             dispatch({type:'set_game_status',status:'idle'})
                             dispatch({type:'fn_reset'})

@@ -14,7 +14,7 @@ export const Infos = () => {
     return (
         <div className="mx-2 md:mx-4 border-t border-lime-500 mt-4 px-2 md:px-4 overflow-y-auto mb-1">
             <div className="font-bold  text-sky-700 sm:text-3xl">Records of {state.calType} x {state.total}题:</div>
-            {state.infos && state.infos.map((val: any, idx: number) => <Info key={idx} idx={idx} name={state.userName} createdAt={val.createdAt} time={val.time} />)}
+            {state.infos && state.infos.map((val: any, idx: number) => <Info key={idx} idx={idx} name={state.userName} createdAt={val.createdAt} time={val.record} />)}
         </div>
     )
 }

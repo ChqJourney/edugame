@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { CalculatorContext } from "../operations/CalculatorContext";
 
-export const Ratings = ({ duration, sounder,status }: { duration: number, sounder: ({ id }: { id: string }) => void,status:string }) => {
-    console.log('render ratings')
+export const Ratings = ({ duration}: { duration: number}) => {
+    
     const { state } = useContext(CalculatorContext)
     const { roundTime } = state
     
